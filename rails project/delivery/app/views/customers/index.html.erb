@@ -1,0 +1,38 @@
+<h1>Listing customers</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><strong>Name</strong></td>
+      <td><strong>address</strong></td>
+      <td><strong>Details</strong></td>
+    </tr>
+    <% @customers.each do |customer| %>
+      <tr>
+
+        <td><%= customer.name %></td>
+        <td><%= customer.address %></td>
+        <% if current_user.admin %>
+          <td><%= link_to "Show #{customer.name}", customer_path(customer) %></td>
+        <% else %>
+          <td><%= link_to "Go on #{customer.name}'s order'", customer_path(customer) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<% if @user %>
+  <p>
+    <%= link_to "Back to profile", user_path(@user), {:class => "btn btn-primary"} %>
+  </p>
+<% else %>
+  <p><%= link_to 'New Customer', new_customer_path %></p>
+<% end %>
