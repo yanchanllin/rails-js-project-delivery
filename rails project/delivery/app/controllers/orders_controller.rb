@@ -33,6 +33,7 @@ class OrdersController < ApplicationController
     params.require(:order).permit(
         :name,
         :address,
+        :phone,
         :food
       )
   end
