@@ -4,6 +4,9 @@ class User < ApplicationRecord
   has_many :customers, through: :orders
   def food
 
+    unless admin
+     
+    end
   end
 
 end
