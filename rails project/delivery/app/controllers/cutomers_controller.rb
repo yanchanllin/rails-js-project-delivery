@@ -40,7 +40,6 @@ class CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(
       :user_id,
-      :order_id
       )
   end
 end

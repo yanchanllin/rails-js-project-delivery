@@ -1,12 +1,13 @@
-class User < ApplicationRecord
+class User < ActiveRecord::Base
   has_secure_password
-  has_many :orders
-  has_many :customers, through: :orders
-  def food
+  has_many :customers 
+  has_many :orders, through: :customers
 
-    unless admin
+  # def food
+
+  #   unless admin
      
-    end
-  end
+  #   end
+  # end
 
 end

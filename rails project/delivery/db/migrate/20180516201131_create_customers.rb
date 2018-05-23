@@ -4,8 +4,7 @@ class CreateCustomers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :address
       t.string :phone
-      t.string :food
-      t.string :order_id 
+      t.string :user_id 
 
     end
   end

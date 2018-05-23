@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
         :name,
         :address,
         :phone,
-        :food
+        :description
       )
   end
 end

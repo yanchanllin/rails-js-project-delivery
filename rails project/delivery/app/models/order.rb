@@ -1,5 +1,4 @@
 class Order < ActiveRecord::Base
-  belongs_to :user
   belongs_to :customer
 
   def take_order
