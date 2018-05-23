@@ -17,10 +17,10 @@ ActiveRecord::Schema.define(version: 2018_05_16_201342) do
     t.string "address"
     t.string "phone"
     t.string "food"
+    t.string "order_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "user_id"
     t.integer "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2018_05_16_201342) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
+    t.string "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
