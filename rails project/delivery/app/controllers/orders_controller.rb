@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find_by(id: params[:id])
-    @cutomer = @order.cutomers.build(user_id:current_user.id)
+    @customer = @order.customers.build(user_id:current_user.id)
   end
 
   def new
@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
 
   def create
     order = Order.create(order_params)
+    # binding.pry 
     redirect_to order_path(order)
   end
 
@@ -31,10 +32,10 @@ class OrdersController < ApplicationController
   private
   def order_params
     params.require(:order).permit(
-        :name,
-        :address,
-        :phone,
-        :description
+        :description,
+        :customer_id,
+        :user_id
+
       )
   end
 end

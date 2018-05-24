@@ -3,8 +3,7 @@ class CreateCustomers < ActiveRecord::Migration[5.2]
     create_table :customers do |t|
       t.string :name
       t.string :address
-      t.string :phone
-      t.string :user_id 
+      t.string :phone 
 
     end
   end

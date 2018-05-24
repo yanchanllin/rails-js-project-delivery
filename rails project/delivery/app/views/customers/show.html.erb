@@ -6,10 +6,10 @@
     <p><strong>Name:</strong> <%= @customer.name %></p>
     <p><strong>address:</strong> <%= @customer.address %></p>
     <p><strong>phone:</strong> <%= @customer.phone %></p>
-    <p><strong>food:</strong> <%= @customer.food %></p>
     <% if current_user.admin %>
       <%= link_to 'Edit Customer', [:edit, @customer] %></p>
-    <% else %>
+    <% else %> 
+    binding.pry 
       <%= form_for @order do |f| %>
         <%= f.hidden_field :user_id %><br />
         <%= f.hidden_field :customer_id %><br />

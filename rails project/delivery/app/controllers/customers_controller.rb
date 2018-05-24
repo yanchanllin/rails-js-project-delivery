@@ -6,7 +6,7 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find_by(id: params[:id])
-    @cutomer = @customer.orders.build(user_id:current_user.id)
+    @order = @customer.orders.build(user_id:current_user.id)
   end
 
   def new
@@ -17,6 +17,7 @@ class CustomersController < ApplicationController
   def create
     if (customer = Customer.create customer_params)
       session[:customer_id] = customer.id
+      # binding.pry
       redirect_to customer_path(customer)
     else
       render 'new'
@@ -39,7 +40,9 @@ class CustomersController < ApplicationController
   private
   def customer_params
     params.require(:customer).permit(
-      :user_id,
+      :name,
+      :address,
+      :phone
       )
   end
 end
