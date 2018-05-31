@@ -1,0 +1,35 @@
+<h1>Listing orders</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><strong>Description</strong></td>
+    </tr>
+    <% @orders.each do |order| %>
+      <tr>
+
+        <td><%= order.description %></td>
+        <% if current_user.admin %>
+          <td><%= link_to "Show #{order.description}", order_path(order) %></td>
+        <% else %>
+          <td><%= link_to "Go on #{order.description}'s order'", order_path(order) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<% if @user %>
+  <p>
+    <%= link_to "Back to profile", user_path(@user), {:class => "btn btn-primary"} %>
+  </p>
+<% else %>
+  <p><%= link_to 'New Order', new_order_path %></p>
+<% end %>

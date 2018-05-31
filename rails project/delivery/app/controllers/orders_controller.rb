@@ -5,16 +5,17 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find_by(id: params[:id])
-    @customer = @order.customers.build(user_id:current_user.id)
+   
   end
 
-  def new
+  def new 
     @order = Order.new
+    render template: 'orders/new'
+
   end
 
   def create
     order = Order.create(order_params)
-    # binding.pry 
     redirect_to order_path(order)
   end
 

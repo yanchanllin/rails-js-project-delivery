@@ -3,16 +3,14 @@
 <div class="center">
 
   <div class="info">
-    <p><strong>Name:</strong> <%= @customer.name %></p>
-    <p><strong>address:</strong> <%= @customer.address %></p>
-    <p><strong>phone:</strong> <%= @customer.phone %></p>
+    <p><strong>description:</strong> <%= @order.description %></p>
     <% if current_user.admin %>
-      <%= link_to 'Edit Customer', [:edit, @customer] %></p>
+      <%= link_to 'Edit Order', [:edit, @order] %></p>
     <% else %> 
       <%= form_for @order do |f| %>
         <%= f.hidden_field :user_id %><br />
         <%= f.hidden_field :customer_id %><br />
-        <p><%= link_to 'create order', new_order_path %></p>
+        <%= f.submit "Go to this order", class:"btn btn-light" %>
       <% end %>
     <% end %>
   </div>

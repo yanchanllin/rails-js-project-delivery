@@ -1,0 +1,10 @@
+<%= form_for(@order) do |f| %>
+  <div class="form-group">
+    <%= f.label :description %><br>
+    <%= f.text_field :description, description: "form-control" %></div>
+
+
+  <div class="actions">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
