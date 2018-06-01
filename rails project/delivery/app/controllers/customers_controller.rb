@@ -17,7 +17,6 @@ class CustomersController < ApplicationController
   def create
     if (customer = Customer.create customer_params)
       session[:customer_id] = customer.id
-      # binding.pry
       redirect_to customer_path(customer)
     else
       render 'new'

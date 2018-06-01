@@ -14,9 +14,10 @@ class OrdersController < ApplicationController
 
   end
 
-  def create
-    order = Order.create(order_params)
-    redirect_to order_path(order)
+  def create 
+    @order = Order.new(order_params)
+    @order.customer = Customer.find_by(params[:customer_id])
+    render template: 'orders/id'
   end
 
   def edit
