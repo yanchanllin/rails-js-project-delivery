@@ -9,7 +9,9 @@ class OrdersController < ApplicationController
   end
 
   def new 
-    @order = Order.new
+    @customer = Customer.find(params[:customer_id])
+    
+    @order = @customer.orders.build
     render template: 'orders/new'
 
   end
@@ -17,7 +19,8 @@ class OrdersController < ApplicationController
   def create 
     @order = Order.new(order_params)
     @order.customer = Customer.find_by(params[:customer_id])
-    render template: 'orders/id'
+    @order.save 
+    redirect_to order_path(@order)
   end
 
   def edit

@@ -1,10 +1,11 @@
 class Order < ActiveRecord::Base
-  belongs_to :customer
+  belongs_to :meal
+  belongs_to :user
 
   def take_order
     user_has_address，user_has_phone = check_if_user_meets_the_requirements
     if user_has_address && user_has_phone
-      start_order
+      start_orderp
     elsif user_has_address && !user_has_phone
        "Sorry. " + has_no_phone
     elsif user_has_phone && !user_has_address

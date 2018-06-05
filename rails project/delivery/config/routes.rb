@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'meal/name:string'
   get '/users/new', to: 'users#new', as: 'new_user'
  root 'static_pages#home'
  get '/users', to:'users#index', as: 'users'
@@ -18,6 +19,12 @@ Rails.application.routes.draw do
  post '/orders', to:"orders#create", as: 'orders'
  get '/orders/:id', to:"orders#show", as: 'order'
  get '/orders/:id/edit', to: 'orders#edit', as: 'edit_order'
- get 'customers/:id/orders/new', to: 'orders#new'
+ #get 'customers/:customer_id/orders/new', to: 'orders#new', as: 'new_customer_order'
+ #post '/customers/:id/orders', to: 'orders#create'
  patch '/orders/:id', to: 'orders#update'
+
+ resources :customers do
+  resources :orders 
+
+ end
 end

@@ -4,14 +4,10 @@
 
   <div class="info">
     <p><strong>description:</strong> <%= @order.description %></p>
-    <% if current_user.admin %>
+
+    <% if current_user.admin || current_user.orders.include?(@order) %>
       <%= link_to 'Edit Order', [:edit, @order] %></p>
-    <% else %> 
-      <%= form_for @order do |f| %>
-        <%= f.hidden_field :user_id %><br />
-        <%= f.hidden_field :customer_id %><br />
-        <%= f.submit "Go to this order", class:"btn btn-light" %>
-      <% end %>
+
     <% end %>
   </div>
 
