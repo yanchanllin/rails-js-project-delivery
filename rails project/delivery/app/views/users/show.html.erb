@@ -14,7 +14,10 @@
     <% if @user.admin %>
       <p><strong>ADMIN</strong></p>
     <% end %>
+    <% @user.meals.each do |meal| %>
+    <%# meal. %>
+  <% end %>
     <p><strong>User Name:</strong> <%= @user.name %></p>
-    <p><%= link_to 'create meal', meals_path %></p>
+    <p><%= link_to 'create meal', new_meal_path %></p>
   </div>
 </div>
