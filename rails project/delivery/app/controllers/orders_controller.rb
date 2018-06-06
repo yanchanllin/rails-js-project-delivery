@@ -9,23 +9,23 @@ class OrdersController < ApplicationController
   end
 
   def new 
-    @customer = Customer.find(params[:customer_id])
+    @meal = Meal.find(params[:meal_id])
     
-    @order = @customer.orders.build
+    @order = @meal.orders.build
     render template: 'orders/new'
 
   end
 
   def create 
     @order = Order.new(order_params)
-    @order.customer = Customer.find_by(params[:customer_id])
+    @order.meal = Meal.find_by(params[:meal_id])
     @order.save 
     redirect_to order_path(@order)
   end
 
   def edit
     @order = Order.find_by(id: params[:id])
-    @customer = @order.cutomers.build(user_id:current_user.id)
+    @meal = @order.meals.build(user_id:current_user.id)
   end
 
   def update
@@ -37,8 +37,8 @@ class OrdersController < ApplicationController
   private
   def order_params
     params.require(:order).permit(
-        :description,
-        :customer_id,
+        :quantity,
+        :meal_id,
         :user_id
 
       )

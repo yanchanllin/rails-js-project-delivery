@@ -16,9 +16,8 @@ class MealsController < ApplicationController
 
   def create 
     @meal = Meal.new(meal_params)
-    @order.meal = Meal.find_by(params[:meal_id])
     @meal.save 
-    redirect_to meal_path(@meal)
+    redirect_to meals_path(@meal)
   end
 
   def edit
