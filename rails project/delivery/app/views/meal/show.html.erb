@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<div class="center">
+
+  <div class="info">
+    <p><strong>name:</strong> <%= @meal.name %></p>
+
+    <% if current_user.admin || current_user.meals.include?(@meal) %>
+      <%= link_to 'Edit Meal', [:edit, @meal] %></p>
+
+    <% end %>
+  </div>
+
+</div>

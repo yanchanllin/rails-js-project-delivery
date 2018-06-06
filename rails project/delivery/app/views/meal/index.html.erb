@@ -1,0 +1,35 @@
+<h1>Listing meals</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><strong>Name</strong></td>
+    </tr>
+    <% @meals.each do |meal| %>
+      <tr>
+
+        <td><%= meal.name %></td>
+        <% if current_user.admin %>
+          <td><%= link_to "Show #{meal.name}", meal_path(meal) %></td>
+        <% else %>
+          <td><%= link_to "Go on #{meal.name}'s meal", meal_path(meal) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<% if @user %>
+  <p>
+    <%= link_to "Back to profile", user_path(@user), {:class => "btn btn-primary"} %>
+  </p>
+<% else %>
+  <p><%= link_to 'New meal', new_meal_path %></p>
+<% end %>
