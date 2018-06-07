@@ -10,7 +10,7 @@ class MealsController < ApplicationController
 
   def new 
     @meal = Meal.new
-   
+    render template: 'meals/new'
 
   end
 

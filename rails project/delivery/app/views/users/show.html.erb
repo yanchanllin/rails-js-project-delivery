@@ -10,13 +10,17 @@
 
 <div class="center">
 
-  <div class="info">
+  <div< class="info">
     <% if @user.admin %>
       <p><strong>ADMIN</strong></p>
     <% end %>
+
+    <ol>
     <% @user.meals.each do |meal| %>
-    <%# meal. %>
+    <li><% meal.name %></li>
   <% end %>
+    </ol>
+    
     <p><strong>User Name:</strong> <%= @user.name %></p>
     <p><%= link_to 'create meal', new_meal_path %></p>
   </div>

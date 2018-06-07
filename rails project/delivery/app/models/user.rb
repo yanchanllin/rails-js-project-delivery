@@ -4,11 +4,4 @@ class User < ActiveRecord::Base
   has_many :meals, through: :orders
   
 
-  # def food
-
-  #   unless admin
-     
-  #   end
-  # end
-
 end
