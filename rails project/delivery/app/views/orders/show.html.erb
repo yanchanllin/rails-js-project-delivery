@@ -3,12 +3,12 @@
 <div class="center">
 
   <div class="info">
-    <p><strong>description:</strong> <%= @order.description %></p>
 
-    <% if current_user.admin || current_user.orders.include?(@order) %>
-      <%= link_to 'Edit Order', [:edit, @order] %></p>
 
-    <% end %>
+
+        <%= submit_tag "Go on this meal", class:"btn btn-light" %>
+     
+    
   </div>
 
 </div>

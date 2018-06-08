@@ -5,24 +5,22 @@ class MealsController < ApplicationController
 
   def show
     @meal = Meal.find_by(id: params[:id])
-   
+    @order = @meal.orders.build(user_id:current_user.id)
   end
 
   def new 
     @meal = Meal.new
-    render template: 'meals/new'
 
   end
 
   def create 
-    @meal = Meal.new(meal_params)
-    @meal.save 
-    redirect_to meals_path(@meal)
+    meal = Meal.create(meal_params)
+    redirect_to meal_path(meal)
   end
 
   def edit
     @meal =  Meal.find_by(id: params[:id])
-    @meal = @order. Meals.build(user_id:current_user.id)
+    @order = @meal.orders.build(user_id:current_user.id)
   end
 
   def update

@@ -1,7 +1,7 @@
-<%= form_for([@customer, @order]) do |f| %>
+<%= form_for(@order) do |f| %>
   <div class="form-group">
-    <%= f.label :description %><br>
-    <%= f.text_field :description, description: "form-control" %></div>
+    <%= f.label :quantity %><br>
+    <%= f.text_field :quantity, class: "form-control" %></div>
 
 
   <div class="actions">

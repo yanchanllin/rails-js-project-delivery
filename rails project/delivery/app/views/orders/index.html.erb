@@ -9,16 +9,16 @@
 
   <tbody>
     <tr>
-      <td><strong>Description</strong></td>
+      <td><strong>Order</strong></td>
     </tr>
     <% @orders.each do |order| %>
       <tr>
 
-        <td><%= order.description %></td>
+        <td><%= order.quantity %></td>
         <% if current_user.admin %>
-          <td><%= link_to "Show #{order.description}", order_path(order) %></td>
+          <td><%= link_to "Show #{order.quantity}", order_path(order) %></td>
         <% else %>
-          <td><%= link_to "Go on #{order.description}'s order'", order_path(order) %></td>
+          <td><%= link_to "Go on #{order.quantity}", order_path(order) %></td>
         <% end %>
       </tr>
     <% end %>

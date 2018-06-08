@@ -1,8 +1,9 @@
-<%= form_for @meal do |f| %>
+<%= form_for(@meal) do |f| %>
 
   <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %></div>
+    <%= f.text_field :name, class: "form-control" %></div>
+
 
 
   <div class="actions">

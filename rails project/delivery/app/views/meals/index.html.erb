@@ -9,7 +9,7 @@
 
   <tbody>
     <tr>
-      <td><strong>Name</strong></td>
+      <td><strong>Meal Name</strong></td>
     </tr>
     <% @meals.each do |meal| %>
       <tr>
@@ -18,7 +18,7 @@
         <% if current_user.admin %>
           <td><%= link_to "Show #{meal.name}", meal_path(meal) %></td>
         <% else %>
-          <td><%= link_to "Go on #{meal.name}'s meal", meal_path(meal) %></td>
+          <td><%= link_to "Go on #{meal.name}", meal_path(meal) %></td>
         <% end %>
       </tr>
     <% end %>
