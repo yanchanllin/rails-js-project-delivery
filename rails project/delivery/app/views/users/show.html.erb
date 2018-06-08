@@ -15,7 +15,7 @@
       <p><strong>ADMIN</strong></p>
     <% end %>
     <p><strong>User Name:</strong> <%= @user.name %></p>  
-    
+    <p>Orders:</p>
     <ol>
     <% @user.meals.each do |meal| %>
     <li><%= meal.name %></li>

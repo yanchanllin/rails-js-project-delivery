@@ -15,6 +15,7 @@ class MealsController < ApplicationController
 
   def create 
     meal = Meal.create(meal_params)
+    meal.save
     redirect_to meal_path(meal)
   end
 
