@@ -18,12 +18,12 @@ Rails.application.routes.draw do
  post '/orders', to:"orders#create", as: 'orders'
  get '/orders/:id', to:"orders#show", as: 'order'
  get '/orders/:id/edit', to: 'orders#edit', as: 'edit_order'
- #get 'meals/:meal_id/orders/new', to: 'orders#new', as: 'new_meal_order'
- #post '/meals/:id/orders', to: 'orders#create'
+get 'meals/:meal_id/orders/new', to: 'orders#new', as: 'new_meal_order'
+post '/meals/:id/orders', to: 'orders#create'
  patch '/orders/:id', to: 'orders#update'
 
  resources :meals do
-  resources :orders do
+  resources :orders
   end 
- end
+
 end
