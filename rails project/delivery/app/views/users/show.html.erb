@@ -19,9 +19,11 @@
     <ol>
     <% @user.meals.each do |meal| %>
     <li><%= meal.name %></li>
+    <p><%= link_to 'Edit meal', edit_meal_path %></p>
   <% end %>
     </ol>
+   
     <p><%= link_to 'Add meal', new_meal_path %></p>
-    <p><%= link_to 'Edit meal', edit_meal_path %></p>
+    
   </div>
 </div>
