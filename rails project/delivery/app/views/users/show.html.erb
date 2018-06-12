@@ -16,14 +16,15 @@
     <% end %>
     <p><strong>User Name:</strong> <%= @user.name %></p>  
     <p>Orders:</p>
-    <ol>
-    <% @user.meals.each do |meal| %>
-    <li><%= meal.name %></li>
-    <p><%= link_to 'Edit meal', edit_meal_path %></p>
-  <% end %>
-    </ol>
+    
+    <% @user.orders.each do |order| %> 
+      <p><%= order.meal.name %></p>
+      <p>quantity: <%= order.quantity %></p>
+      <p><%= link_to 'Edit order', edit_order_path(order) %></p>
+ 
+    <% end %>
+    <p><%= link_to 'Add order', new_order_path %></p>
    
-    <p><%= link_to 'Add meal', new_meal_path %></p>
     
   </div>
 </div>

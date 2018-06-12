@@ -1,6 +1,7 @@
 <%= form_for(@order) do |f| %>
   <div class="form-group">
     <%= f.label :quantity %><br>
+    <%= f.collection_select :meal_id, Meal.all, :id, :name %>
     <%= f.text_field :quantity, class: "form-control" %></div>
 
 

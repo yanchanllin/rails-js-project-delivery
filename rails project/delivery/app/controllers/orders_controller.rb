@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  
+
   def index
     @orders = Order.all
   end
@@ -9,29 +11,30 @@ class OrdersController < ApplicationController
   end
 
   def new 
-    @meal = Meal.find(params[:meal_id])
+    #@meal = Meal.find(params[:meal_id])
     
-    @order = @meal.orders.build
+    @order = Order.new
     render template: 'orders/new'
 
   end
 
-  def create 
+  def create
+    # binding.pry
     @order = Order.new(order_params)
-    @order.meal = Meal.find_by(params[:meal_id])
+    current_user.orders << @order
     @order.save 
-    redirect_to order_path(@order)
+    redirect_to user_path(current_user)
   end
 
   def edit
     @order = Order.find_by(id: params[:id])
-    @meal = @order.meals.build(user_id:current_user.id)
+  
   end
 
   def update
     order = Order.find_by(id: params[:id])
     order.update(order_params)
-    redirect_to order_path(order)
+    redirect_to user_path(current_user)
   end
 
   private
