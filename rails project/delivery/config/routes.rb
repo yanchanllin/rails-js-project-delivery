@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root 'static_pages#home'
+  get '/auth/facebook/callback' => 'sessions#new'
+
   get '/users/new', to: 'users#new', as: 'new_user'
  root 'static_pages#home'
  get '/users', to:'users#index', as: 'users'
@@ -6,9 +9,9 @@ Rails.application.routes.draw do
  get '/users/:id', to: 'users#show', as: 'user'
  get '/users/:id/edit', to: 'users#edit', as: 'edit_user'
  get '/meals', to: 'meals#index'
- get '/signin', to: 'session#new', as: 'signin'
- post '/session', to: 'session#create', as: 'session'
- delete '/session/', to: 'session#destroy'
+ get '/signin', to: 'sessions#new', as: 'signin'
+ post '/sessions', to: 'sessions#create', as: 'sessions'
+ delete '/sessions/', to: 'sessions#destroy'
  get '/meals/new', to: 'meals#new', as: 'new_meal'
  get '/meals/:id', to: 'meals#show', as: 'meal'
  get '/meals/:id/edit', to: 'meals#edit', as: 'edit_meal'

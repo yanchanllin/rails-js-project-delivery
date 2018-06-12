@@ -40,8 +40,8 @@ chicken pasta - 1
 
 
 
-Add New Meal in the navigation bar when logged in
-Add validation so user cannot create empty name for meal and empty quantity fory order
-Add login through Facebook -authentication
+--Add New Meal in the navigation bar when logged in
+--Add validation so user cannot create empty name for meal and empty quantity for order
+--Add login through Facebook -authentication
 Display error messages when user tries to create a meal or an order with no values
 Add scope method to one of your models - Order model?
