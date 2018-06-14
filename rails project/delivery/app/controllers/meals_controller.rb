@@ -15,9 +15,13 @@ class MealsController < ApplicationController
   end
 
   def create 
-    meal = Meal.create(meal_params)
-    meal.save
-    redirect_to meal_path(meal)
+    @meal = Meal.create(meal_params)
+    if @meal.save
+      redirect_to meal_path(@meal)
+    else
+      render template: 'new_meal'
+      #render meals newview to show the errors
+    end
   end
 
   def edit

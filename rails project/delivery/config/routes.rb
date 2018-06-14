@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
-  get '/auth/facebook/callback' => 'session#new'
+  get '/auth/facebook/callback' => 'session#create'
 
   get '/users/new', to: 'users#new', as: 'new_user'
  root 'static_pages#home'
