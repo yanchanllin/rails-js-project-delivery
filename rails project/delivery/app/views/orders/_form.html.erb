@@ -1,4 +1,24 @@
 <%= form_for(@order) do |f| %>
+<% if @order.errors.any? %>
+  <div id="error_explanation">
+    <h2>There were some errors:</h2>
+    <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field<%= ' field_with_errors' if @order.errors[:quantity].any? %>">
+  <%= label_tag "quantity", "quantity" %>
+  <p>Must not be empty.</p>
+  <%= text_field_tag "quantity", @order.quantity %>
+  <p>
+    Please type the quantity you want.
+  </p>
+</div>
+
   <div class="form-group">
     <%= f.label :quantity %><br>
     <%= f.collection_select :meal_id, Meal.all, :id, :name %>
