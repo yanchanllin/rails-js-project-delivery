@@ -10,19 +10,13 @@
   </div>
 <% end %>
 
-<div class="field<%= ' field_with_errors' if @order.errors[:quantity].any? %>">
-  <%= label_tag "quantity", "quantity" %>
-  <p>Must not be empty.</p>
-  <%= text_field_tag "quantity", @order.quantity %>
-  <p>
-    Please type the quantity you want.
-  </p>
+<div class="field<%= ' field_with_errors' if @order.errors[:quantity].any? %>">  
 </div>
 
   <div class="form-group">
-    <%= f.label :quantity %><br>
+    
     <%= f.collection_select :meal_id, Meal.all, :id, :name %>
-    <%= f.text_field :quantity, class: "form-control" %></div>
+    <%= f.select :quantity, options_for_select(1..500), { prompt: "quantity" } %>
 
 
   <div class="actions">

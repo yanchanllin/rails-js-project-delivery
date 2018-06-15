@@ -1,5 +1,5 @@
-<%= form_for(@meal) do |f| %>
-<% if @meal.errors.any? %>
+<%= form_for Meal.new do |f| %>
+<% if (Meal.new).errors.any? %>
   <div id="error_explanation">
     <h2>There were some errors:</h2>
     <ul>
@@ -10,9 +10,9 @@
   </div>
 <% end %>
 
-<div class="field<%= ' field_with_errors' if @meal.errors[:name].any? %>"> </div>
+<div class="field<%='field_with_errors' if (Meal.new).errors[:name].any? %>"> </div>
    
-  <%= text_field_tag "name", @meal.name, placeholder:"enter to create a meal name"%> </div>
+  <%= text_field_tag "name", (Meal.new).name, placeholder:"enter to create a meal name"%> </div>
 
   <%= label_tag "Name", "warnng:Name can not be empty" %>
 

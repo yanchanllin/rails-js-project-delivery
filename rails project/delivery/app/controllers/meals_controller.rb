@@ -16,12 +16,13 @@ class MealsController < ApplicationController
 
   def create 
     @meal = Meal.create(meal_params)
-    if @meal.save
-      redirect_to meal_path(@meal)
-    else
-      render template: 'new_meal'
-      #render meals newview to show the errors
-    end
+    @order.meals << @meal
+     @meal.save
+      redirect_to meal_path(meal)
+    # else
+    #   render 'meals/new'
+    #   #render meals newview to show the errors
+    # end 
   end
 
   def edit
@@ -37,7 +38,7 @@ class MealsController < ApplicationController
 
   private
   def meal_params
-    params.require(:meal).permit(
+    params.permit(:meal).permit(
         :name
       )
   end
