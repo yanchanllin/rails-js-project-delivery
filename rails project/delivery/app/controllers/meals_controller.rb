@@ -6,7 +6,7 @@ class MealsController < ApplicationController
 
   def show
     @meal = Meal.find_by(id: params[:id])
-    @order = @meal.orders.build(user_id:current_user.id)
+    @order = current_user.orders.build(user_id:current_user.id)
   end
 
   def new 
@@ -15,14 +15,9 @@ class MealsController < ApplicationController
   end
 
   def create 
-    @meal = Meal.create(meal_params)
-    @order.meals << @meal
-     @meal.save
-      redirect_to meal_path(meal)
-    # else
-    #   render 'meals/new'
-    #   #render meals newview to show the errors
-    # end 
+    meal = Meal.create(meal_params)
+      render template: 'meals/show'
+        
   end
 
   def edit

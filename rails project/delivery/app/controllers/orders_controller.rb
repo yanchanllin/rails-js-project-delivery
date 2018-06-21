@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
   end
 
   def new 
-    #@meal = Meal.find(params[:meal_id])
     
     @order = Order.new
     render template: 'orders/new'
@@ -19,7 +18,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # binding.pry
     @order = Order.new(order_params)
     current_user.orders << @order
     @order.save 
