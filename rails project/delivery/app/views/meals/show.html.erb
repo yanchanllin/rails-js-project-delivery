@@ -5,16 +5,7 @@
   <div class="info">
     <p><strong>name:</strong> <%= @meal.name %></p>
 
-    <% if current_user.admin || current_user.meals.include?(@meal) %>
+    <% current_user.admin || current_user.meals.include?(@meal) %>
       <%= link_to 'Edit Meal', [:edit, @meal] %></p>
-      <% else %>
-      <%= form_for @order do |f| %>
-      <%= f.hidden_field :quantity %><br />
-        <%= f.hidden_field :user_id %><br />
-        <%= f.hidden_field :meal_id %><br />
-        <%= f.submit "Add this to my order", class:"btn btn-light" %>
-      <% end %>
-    <% end %>
-  </div>
 
-</div>
+  </div>

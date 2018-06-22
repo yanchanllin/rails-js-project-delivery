@@ -14,10 +14,10 @@ class MealsController < ApplicationController
 
   end
 
-  def create 
+  def create
     meal = Meal.create(meal_params)
-      render template: 'meals/show'
-        
+    redirect_to meal_path(meal.id)
+        # error message
   end
 
   def edit
@@ -33,7 +33,7 @@ class MealsController < ApplicationController
 
   private
   def meal_params
-    params.permit(:meal).permit(
+    params.require(:meal).permit(
         :name
       )
   end

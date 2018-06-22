@@ -1,10 +1,11 @@
 <%= form_for(@meal) do |f| %>
 
 <div class="form-group">
-  <%= text_field_tag "name", @meal.name, placeholder:"enter to create a meal name"%> </div>
-   <%= label_tag "Name", "warnng:Name can not be empty" %>
+  
+   <%= f.label :name, "warnng:Name can not be empty" %> <br>
+   <%= f.text_field :name, placeholder:"enter to create a meal name",class: "form-control"%> </div>
 
-</div>
+   
   <br />
   <br />
   <div class="actions">
