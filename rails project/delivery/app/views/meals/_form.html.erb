@@ -1,14 +1,18 @@
+
+
 <%= form_for(@meal) do |f| %>
+<%= f.label :name %> <br>
+<%= f.text_field :name, placeholder:"enter to create a meal name",class: "form-control"%> </div>
+ <%= f.submit  %>
+</div>
+<% end %>
 
-<div class="form-group">
-  
-   <%= f.label :name, "warnng:Name can not be empty" %> <br>
-   <%= f.text_field :name, placeholder:"enter to create a meal name",class: "form-control"%> </div>
+<% if @meal.errors.any? %>
+<div id="error_explanation">
 
-   
-  <br />
-  <br />
-  <div class="actions">
-    <%= f.submit class: "btn btn-primary" %>
-  </div>
+
+<% @meal.errors.full_messages.each do |error| %>
+<%= error %>
+<% end %>
+
 <% end %>
