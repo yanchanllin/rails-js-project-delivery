@@ -17,7 +17,7 @@ class MealsController < ApplicationController
   def create
     meal = Meal.create(meal_params)
     redirect_to meal_path(meal.id)
-        # error message
+        # error me
   end
 
   def edit
