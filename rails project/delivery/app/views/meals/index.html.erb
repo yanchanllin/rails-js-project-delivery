@@ -18,7 +18,7 @@
         <% if current_user.admin %>
           <td><%= link_to "Show #{meal.name}", meal_path(meal) %></td>
         <% else %>
-          <td><%= link_to "Go on #{meal.name}", meal_path(meal) %></td>
+          <td><%= link_to "Go on '#{meal.name}'", meal_path(meal) %></td>
         <% end %>
       </tr>
     <% end %>
@@ -26,10 +26,4 @@
 </table>
 <br>
 
-<% if @user %>
-  <p>
-    <%= link_to "Back to profile", user_path(@user), {:class => "btn btn-primary"} %>
-  </p>
-<% else %>
   <p><%= link_to 'New meal', new_meal_path %></p>
-<% end %>
