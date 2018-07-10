@@ -2,9 +2,10 @@ class Order < ActiveRecord::Base
   belongs_to :meal
   belongs_to :user
   validates :quantity, presence: true
+  scope :meal_ordered, -> {where(ordered: true)}
   
-  def self.by_order(order_id)
-    where(order: order_id)
+  def self.meal_ordered
+    where(ordered: true)
   end
 
   

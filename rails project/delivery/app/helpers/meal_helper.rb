@@ -1,5 +1,0 @@
-module MealHelper
- 
-  
-   
-end
