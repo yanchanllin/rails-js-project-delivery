@@ -1,3 +1,14 @@
 <h1>New meal</h1>
 
 <%= render 'form' %>
+
+<% if @meal.errors.any? %>
+<div id="error_explanation">
+
+
+<% @meal.errors.full_messages.each do |error| %>
+<h3>><%= error %></h3
+<h3>new meal was "NOT" saved</h3>
+<% end %>
+</div>
+<% end %>

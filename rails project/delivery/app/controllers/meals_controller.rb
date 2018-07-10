@@ -15,9 +15,13 @@ class MealsController < ApplicationController
   end
 
   def create
-    meal = Meal.create(meal_params)
-    redirect_to meal_path(meal.id)
-        # error me
+    @meal = Meal.create(meal_params)
+    if @meal.save
+      @meal.save
+    redirect_to meal_path(@meal.id), notice: 'New meal was saved'
+    else 
+      render :new, notice: 'new meal was NOT saved', alert: @meal.errors.full_messages
+    end
   end
 
   def edit

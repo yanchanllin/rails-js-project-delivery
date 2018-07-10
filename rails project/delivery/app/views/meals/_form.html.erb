@@ -1,18 +1,9 @@
 
 
 <%= form_for(@meal) do |f| %>
-<%= f.label :name %> <br>
-<%= f.text_field :name, placeholder:"enter to create a meal name",class: "form-control"%> </div>
+<%= f.label :name %> 
+<%= f.text_field :name, placeholder:"enter to create a meal name",class: "form-control"%> 
  <%= f.submit  %>
 </div>
 <% end %>
 
-<% if @meal.errors.any? %>
-<div id="error_explanation">
-
-
-<% @meal.errors.full_messages.each do |error| %>
-<%= error %>
-<% end %>
-
-<% end %>
