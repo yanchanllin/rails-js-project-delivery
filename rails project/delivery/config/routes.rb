@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/users/:id',to:'users#show', as:'user'
   get '/users/:id/edit',to:'users#edit', as:'edit_user'
   get '/meals', to:'meals#index'
-  post '/signin', to:'session#new'as:'signin'
+  post '/signin', to:'session#new', as:'signin'
   post '/session' ,to:'session#create', as:'session'
   delete '/session/',to:'session#destroy'
   get'/meals/new', to:'meals#new', as: 'new_meal'
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get '/orders/:id',to:'orders#show', as:'order'
   get '/orders/:id/edit',to:'orders#edit', as:'edit_order'
   patch '/orders/:id',to:'orders#update'
-  get 'meals/:meal_id'/orders/new',to:'orders#new', as:'new_meal_order'
+  get 'meals/:meal_id/orders/new', to: 'orders#new', as:'new_meal_order'
   post '/meals/:id/orders',to: 'orders#create'
 
   resources :meals do 
