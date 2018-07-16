@@ -35,6 +35,10 @@ class MealsController < ApplicationController
     redirect_to meal_path(meal)
   end
 
+  def self.most_recent 
+    @most_recent = @meal.last.name
+  end 
+
   private
   def meal_params
     params.require(:meal).permit(
