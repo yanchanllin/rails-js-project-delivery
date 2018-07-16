@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/users/:id',to:'users#show', as:'user'
   get '/users/:id/edit',to:'users#edit', as:'edit_user'
   get '/meals', to:'meals#index'
-  post '/signin', to:'session#new', as:'signin'
+  get '/signin', to:'session#new', as:'signin'
   post '/session' ,to:'session#create', as:'session'
   delete '/session/',to:'session#destroy'
   get'/meals/new', to:'meals#new', as: 'new_meal'
