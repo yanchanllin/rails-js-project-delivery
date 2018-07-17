@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   post '/users', to:'users#create'
   get '/users/:id',to:'users#show', as:'user'
   get '/users/:id/edit',to:'users#edit', as:'edit_user'
+
+  get '/meals/most_recent', to:'meals#most_recent'
   get '/meals', to:'meals#index'
   get '/signin', to:'session#new', as:'signin'
   post '/session' ,to:'session#create', as:'session'
