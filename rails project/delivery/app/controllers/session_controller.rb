@@ -15,6 +15,7 @@ def create
       @user = User.new(name: request.env["omniauth.auth"][:info][:name], password: SecureRandom.hex(8))
       @user.save
       redirect_to user_path(@user)
+    end 
   else 
     @user = User.find_by(name:params[:user][:name])
     if @user && @user.authenticate(params[:password])
