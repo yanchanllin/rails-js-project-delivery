@@ -3,6 +3,6 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :meals, through: :orders
   validates :name, presence: true
-  validates :password, length: { in:1...8 } 
+  validates :password, length: { in:1...30 } 
 
 end
