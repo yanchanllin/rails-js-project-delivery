@@ -15,5 +15,11 @@
     <br/>
     <%= f.submit class: "btn btn-primary" %>
   </div>
+  
+  <% if flash[:error] %>
+<div class="center alert">
+  <p><%= flash[:error] %></p>
+</div>
+<% end %>
 
 <% end %>

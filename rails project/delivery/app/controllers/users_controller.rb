@@ -5,10 +5,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    if (user = User.create user_params)
-      session[:user_id] = user.id
-      redirect_to user_path(user)
+    @user = User.create(user_params)
+     if @user.save
+        @user.save
+      redirect_to user_path(@user.id)
     else
+      flash.now[:error] = 'Invalid signup,can not be blank' 
       render 'new'
     end
   end
