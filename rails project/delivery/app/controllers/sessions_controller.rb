@@ -24,6 +24,7 @@ def create
 
     redirect_to user_path(@user)
     else 
+      flash.now[:message] = 'Invalid signin,can not be blank' 
       render 'sessions/new'
     end
   end 
