@@ -1,1 +1,12 @@
 <%= render 'form' %>
+
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+
+      
+      <% @user.errors.full_messages.each do |message| %>
+    <h3> <%= message %>invalid sign in,can't be blank</h3>
+      <% end %>
+    
+    </div>
+  <% end %>
