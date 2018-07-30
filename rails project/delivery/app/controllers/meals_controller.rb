@@ -35,8 +35,8 @@ class MealsController < ApplicationController
     redirect_to meal_path(meal)
   end
 
-  def most_recent 
-    @most_recent = Meal.last.name
+  def most_ordered_meal 
+    @most_ordered_meal = Meal.most_ordered
   end 
 
   private

@@ -1,5 +1,5 @@
     
-    ****Welcome to my delivery application(rails project).****
+    ****Welcome to my delivery application(rails project)****
 
 In this application you can be a user sign up and log in or log in with your facebook. Then you can start ordering food from this App, create healthy meals you want to add. Moreover this app will show all the orders you picked and this company will delivery to you. 
 

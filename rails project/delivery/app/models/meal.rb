@@ -2,7 +2,10 @@ class Meal < ApplicationRecord
   has_many :orders
   has_many :users, through: :orders
   validates :name, presence: true
-  scope :most_recently_added_meal, -> {where{order(created_at: :DESC).limit(1)}}
-
+ 
   
+  def self.most_ordered
+    Order.joins(:meal).group('meals.id').order('count(meals.id)DESC').limit(1).first
+  end 
 end
+

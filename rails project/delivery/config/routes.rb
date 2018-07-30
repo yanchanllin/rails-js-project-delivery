@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/users/:id',to:'users#show', as:'user'
   get '/users/:id/edit',to:'users#edit', as:'edit_user'
 
-  get '/meals/most_recent', to:'meals#most_recent'
+  get '/meals/most_ordered_meal', to:'meals#most_ordered_meal'
   get '/meals', to:'meals#index'
   get '/signin', to:'sessions#new', as:'signin'
   post '/sessions' ,to:'sessions#create'
