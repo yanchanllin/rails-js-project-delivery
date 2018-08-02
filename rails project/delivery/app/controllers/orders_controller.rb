@@ -1,10 +1,11 @@
 class OrdersController < ApplicationController
   
 
-  def index
-    @orders = Order.all
+ def index
+    @meal = Meal.find(params[:meal_id])
+    @orders = @meal.orders 
   end
-
+  
   def show
     @order = Order.find_by(id: params[:id])
    
