@@ -4,11 +4,9 @@
 
   <div class="info">
 
+    <p><strong>Quantity:</strong>  <%= @order.quantity %></p>
 
+    <% current_user.admin || current_user.orders.include?(@order) %>
+      <%= link_to 'Edit', [:edit, @order] %></p>
 
-        <%= submit_tag "Go on this meal", class:"btn btn-light" %>
-     
-    
   </div>
-
-</div>
