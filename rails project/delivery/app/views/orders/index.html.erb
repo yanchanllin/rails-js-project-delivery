@@ -13,13 +13,15 @@
       <td><strong>Order</strong></td>
     </tr>
     <% @orders.each do |order| %>
-      <tr>
-
-        <td><%= order.quantity %></td>
+     
         <% if current_user.admin %>
-          <td><%= link_to "Show #{order.quantity}", order_path(order) %></td>
+        </div>
+          <td><%= link_to "Show #{@meal.name}", order_path(order) %></td>
         <% else %>
-          <td><%= link_to "Go on #{order.quantity}", order_path(order) %></td>
+          <td><%= link_to "Go on #{@meal.name}", order_path(order) %></td>
+          <tr>
+          
+          <td>quantity: <%= order.quantity %></td>
         <% end %>
       </tr>
     <% end %>
@@ -34,3 +36,5 @@
 <% else %>
   <p><%= link_to 'New Order', new_order_path %></p>
 <% end %>
+
+
