@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def new 
-    
+    @meal = Meal.find(params[:meal_id])
     @order = Order.new
     render template: 'orders/new'
 

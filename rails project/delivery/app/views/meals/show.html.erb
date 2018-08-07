@@ -7,5 +7,6 @@
 
     <% current_user.admin || current_user.meals.include?(@meal) %>
       <%= link_to 'Edit Meal', [:edit, @meal] %></p>
-
+  <p><%= link_to 'Add order', new_meal_order_path(@meal) %></p>
   </div>
+  <p><%= link_to 'listing order', meal_orders_path(@meal) %></p>

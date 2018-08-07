@@ -8,5 +8,5 @@
 
     <% current_user.admin || current_user.orders.include?(@order) %>
       <%= link_to 'Edit', [:edit, @order] %></p>
-
+   
   </div>
