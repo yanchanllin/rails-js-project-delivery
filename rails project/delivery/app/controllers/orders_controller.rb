@@ -21,11 +21,31 @@ class OrdersController < ApplicationController
   end
 
   def create
+    if !params[:meal_id]
     @order = Order.new(order_params)
-    current_user.orders << @order
-    @order.save 
-    redirect_to user_path(current_user)
+    @order.user_id = current_user.id
+    if @order.save
+      respond_to do |f|
+        f.html {redirect_to meal_orders_path(@order.meal) }
+        f.json {render json: @order}
+      end
+    else
+    redirect_to user_path(current_user), :notice => "can't be blank"
   end
+else
+  @meal = Meal.find(params[:meal_id])
+  @order = @meal.orders.create(orders_params)
+  @order.user_id = current_user.id
+    if @order.save
+      respond_to do |f|
+        f.html {redirect_to meal_orders_path(@order.meal)}
+        f.json {render json: @order}
+      end
+    else
+       redirect_to new_meal_order_path, :notice => "can't be blank"
+    end
+  end
+end
 
   def edit
     @order = Order.find_by(id: params[:id])
