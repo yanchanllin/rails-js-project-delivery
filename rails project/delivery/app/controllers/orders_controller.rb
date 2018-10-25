@@ -47,6 +47,26 @@ else
   end
 end
 
+def next_order
+  @order = Order.find(params[:id])
+  @next_order = @order.next_order
+  respond_to do |f|
+    f.html {render @next_order}
+    f.json {render json: @next_order.to_json(
+      { :include => [
+          user: {
+            only: [:username]
+          },
+          meal: {
+           only: [:name]
+          }
+        ]
+      }
+    )
+  }
+  end
+end
+
   def edit
     @order = Order.find_by(id: params[:id])
   
