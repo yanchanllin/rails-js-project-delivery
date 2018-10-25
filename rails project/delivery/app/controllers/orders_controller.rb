@@ -12,6 +12,10 @@ class OrdersController < ApplicationController
   
   def show
     @order = Order.find_by(id: params[:id])
+    respond_to do |f|
+      f.html {render @order}
+      f.json {render json: @order}
+    end 
   end
 
   def new 
@@ -98,6 +102,10 @@ end
     order = Order.find_by(id: params[:id])
     order.update(order_params)
     redirect_to user_path(current_user)
+  end
+
+  def users_orders
+    @user = User.find_by_id(session[:user_id])
   end
 
   private
