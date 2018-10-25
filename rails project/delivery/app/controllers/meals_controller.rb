@@ -1,17 +1,23 @@
 class MealsController < ApplicationController
   skip_before_action :verify_user_is_authenticated, only: [:new,:create]
+
   def index
     @meals = Meal.all
-  end
-
-  def show
-    @meal = Meal.find_by(id: params[:id])
-    @order = current_user.orders.build(user_id:current_user.id)
+    respond_to do |f|
+      f.html {render :index}
+      f.json {render json: @meals, include: :orders}
+    end
   end
 
   def new 
     @meal = Meal.new
+  end
 
+  def show
+    respond_to do |f|
+      f.html
+      f.json {render json: @meal}
+    end
   end
 
   def create
