@@ -67,6 +67,28 @@ def next_order
   end
 end
 
+def all_orders
+  @orders = Order.all
+  respond_to do |f|
+    f.html {render @orders}
+    f.json {render json: @orders.to_json(
+      { :include => [
+          user: {
+            only: [:username]
+          },
+          meal:{}
+        ]
+      }
+    )
+  }
+  end
+end
+
+def highest_ordered
+  @orders = Order.all
+
+end
+
   def edit
     @order = Order.find_by(id: params[:id])
   
