@@ -5,6 +5,7 @@ This is a Rails-based app with added Javascript/Jquery front-end for you can be 
 
 To use this app, just clone https://github.com/yanchanllin/rails-js-project-delivery.git. After cloning, change directory to rails project/delivery and run the following: 'bundle install', 'rails db:migrate', and run 'rails s'; then navigate to the server https://localhost:3000.
 
+
 Ruby version Ruby 2.3.3p222
 
 ## Contributing
