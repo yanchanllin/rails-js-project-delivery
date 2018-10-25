@@ -8,14 +8,12 @@ class OrdersController < ApplicationController
   
   def show
     @order = Order.find_by(id: params[:id])
-   
   end
 
   def new 
     @meal = Meal.find(params[:meal_id])
     @order = Order.new
     render template: 'orders/new'
-
   end
 
   def create
