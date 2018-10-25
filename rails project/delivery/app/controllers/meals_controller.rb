@@ -30,6 +30,14 @@ class MealsController < ApplicationController
     end
   end
 
+  def next
+    @next_meal = @meal.next
+    respond_to do |f|
+      f.html {render @next_meal}
+      f.json {render json: @next_meal}
+    end
+  end
+
   def edit
     @meal =  Meal.find_by(id: params[:id])
     @order = @meal.orders.build(user_id:current_user.id)
@@ -46,6 +54,12 @@ class MealsController < ApplicationController
   end 
 
   private
+
+  def set_meal
+    @meal = Meal.find(params[:id])
+  end
+
+
   def meal_params
     params.require(:meal).permit(
         :name
