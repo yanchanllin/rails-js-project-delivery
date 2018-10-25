@@ -4,6 +4,10 @@ class OrdersController < ApplicationController
  def index
     @meal = Meal.find(params[:meal_id])
     @orders = @meal.orders 
+    respond_to do |f|
+      f.html {render :index}
+      f.json {render json: @meal, include: :orders}
+    end 
   end
   
   def show
