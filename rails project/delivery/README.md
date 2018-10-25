@@ -3,7 +3,7 @@ Welcome to My Delivery Application(Rails with JavaScript Portfolio Project)
 
 This is a Rails-based app with added Javascript/Jquery front-end for you can be a user sign up and log in or log in with your Facebook. Then you can start ordering food from this App, create healthy meals you want to add. Moreover this app will show all the orders you picked and this company will delivery to you. 
 
-To use this app, just clone https://github.com/yanchanllin/rails-js-project-delivery.git. After cloning, change directory to uniquelyfem and run the following: 'bundle install', 'rails db:migrate', and run 'rails s'; then navigate to the server https://localhost:3000.
+To use this app, just clone https://github.com/yanchanllin/rails-js-project-delivery.git. After cloning, change directory to rails project/delivery and run the following: 'bundle install', 'rails db:migrate', and run 'rails s'; then navigate to the server https://localhost:3000.
 
 Ruby version Ruby 2.3.3p222
 
