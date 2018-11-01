@@ -1,0 +1,5 @@
+$(() => {
+    orderClickHandlers()
+    seeOrders();
+    submitOrder();
+  })
