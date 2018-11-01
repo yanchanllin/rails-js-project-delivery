@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :verify_user_is_authenticated, only: [:new,:create]
   
   def new
+    root_if_logged_in
     @user = User.new
   end
 
@@ -33,10 +34,15 @@ end
 
 def destroy
    session.delete("user_id")
+   flash[:message] = 'You have logged out.'
   redirect_to root_path
 end 
 
   private
+
+  def user_authenticated?
+    @user.authenticate(params[:user][:password])
+  end
  
   def auth
     request.env['omniauth.auth']
