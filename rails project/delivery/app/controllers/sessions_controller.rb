@@ -40,10 +40,6 @@ end
 
   private
 
-  def user_authenticated?
-    @user.authenticate(params[:user][:password])
-  end
- 
   def auth
     request.env['omniauth.auth']
   end
