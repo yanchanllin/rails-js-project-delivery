@@ -23,3 +23,16 @@ $(() => {
       seeAllOrders(href)
     })
   }
+
+  const submitOrder = () => {
+    $("form#new_order").on("submit", function(event){
+      event.preventDefault();
+      var $form = $(this)
+      var action = $form.attr("action");
+      var params = $form.serialize()
+      $.ajax({
+        url: action,
+        data: params,
+        dataType: "json",
+        method: "POST",
+      })
