@@ -2,7 +2,6 @@ class SessionsController < ApplicationController
   skip_before_action :verify_user_is_authenticated, only: [:new,:create]
   
   def new
-    root_if_logged_in
     @user = User.new
   end
 

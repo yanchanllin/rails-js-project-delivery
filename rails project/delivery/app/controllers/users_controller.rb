@@ -22,16 +22,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    if logged_in
     @user = User.find_by(id:params[:id])
-  else
-    redirect_to '/'
    end
-  end
+
 
   def edit
     @user = User.find(params[:id])
-end
+  end
 
   def update
     @user = User.find(params[:id])

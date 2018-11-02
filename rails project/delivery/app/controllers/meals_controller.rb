@@ -14,10 +14,8 @@ class MealsController < ApplicationController
   end
 
   def show
-    respond_to do |f|
-      f.html
-      f.json {render json: @meal}
-    end
+    @meal = Meal.find_by(id: params[:id])
+    @order = current_user.orders.build(user_id:current_user.id)
   end
 
   def create
