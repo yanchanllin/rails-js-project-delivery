@@ -36,3 +36,9 @@ $(() => {
         dataType: "json",
         method: "POST",
       })
+      .success(function(json){
+        $('#app-container').html("")
+        orderFormat(json)
+      })
+    })
+  }
