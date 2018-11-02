@@ -14,3 +14,12 @@ $(() => {
       seeNextOrder(mealId, orderId);
     })
   }
+
+  const seeOrders = () => {
+    $(document).on("click", "a#js-seeAllOrders", function(event){
+      event.preventDefault();
+      let href = $(this).attr("href")
+       history.pushState(null, null, "/orders")
+      seeAllOrders(href)
+    })
+  }
