@@ -47,16 +47,17 @@ end
   end
 
   def update
-    order = Order.find_by(id: params[:id])
-    order.update(order_params)
-    redirect_to user_path(current_user)
+    @current_user = Meal.find(session[:meal_id]) if session[:meal_id]
+    @current_user.orders.find_by(id: params[:id]).update(order_params)
+    flash[:notice] = 'Order was successfully updated.' 
+    redirect_to orders_path
   end
 
   def destroy
     @current_user = Meal.find(session[:meal_id]) if session[:meal_id]
     @current_user.orders.find_by(id: params[:id]).destroy
     flash[:notice] = 'Order was successfully destroyed.' 
-    redirect_to meals_path
+    redirect_to orders_path
   end
 
   def add
