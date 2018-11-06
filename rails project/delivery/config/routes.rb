@@ -7,7 +7,7 @@ Rails.application.routes.draw do
  
   root 'static_pages#home'
   get '/meals/most_ordered_meal', to:'meals#most_ordered_meal'
-
+  resources :comments
   resources :meals do 
     resources :orders 
   end 
