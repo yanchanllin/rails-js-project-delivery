@@ -108,6 +108,21 @@ end
     @user = User.find_by_id(session[:user_id])
   end
 
+  def destroy
+    @current_user = Meal.find(session[:meal_id]) if session[:meal_id]
+    @current_user.orders.find_by(id: params[:id]).destroy
+    flash[:notice] = 'Order was successfully destroyed.' 
+    redirect_to meals_path
+  end
+
+  def add
+    @order = Order.find(params[:id])
+    
+    @comment = Comment.new(content: params[:content])
+    @order.comments << @comment
+    @comment.save
+  end
+
   private
   def order_params
     params.require(:order).permit(
@@ -117,4 +132,9 @@ end
 
       )
   end
+
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
+
 end
