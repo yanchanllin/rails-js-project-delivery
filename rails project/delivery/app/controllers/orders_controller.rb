@@ -21,15 +21,11 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @current_user = Meal.find(session[:meal_id]) if session[:meal_id]
-    if @current_user.orders.create(order_params).valid?
-      @current_user.orders.create(order_params)
+    @order = Order.new(order_params)
+    current_user.orders << @order
+    @order.save 
       flash[:notice] = 'Order was successfully created.'
-      redirect_to orders_path
-  
-    else
-      redirect_to new_order_path
-    end
+      redirect_to user_path(current_user)
   end
 
 def highest_ordered
@@ -47,17 +43,17 @@ end
   end
 
   def update
-    @current_user = Meal.find(session[:meal_id]) if session[:meal_id]
-    @current_user.orders.find_by(id: params[:id]).update(order_params)
+    order = Order.find_by(id: params[:id])
+    order.update(order_params)
     flash[:notice] = 'Order was successfully updated.' 
-    redirect_to orders_path
+    redirect_to user_path(current_user)
   end
 
   def destroy
-    @current_user = Meal.find(session[:meal_id]) if session[:meal_id]
-    @current_user.orders.find_by(id: params[:id]).destroy
+    order = Order.find_by(id: params[:id])
+     order.destroy(order_params)
     flash[:notice] = 'Order was successfully destroyed.' 
-    redirect_to orders_path
+    redirect_to user_path(current_user)
   end
 
   def add
