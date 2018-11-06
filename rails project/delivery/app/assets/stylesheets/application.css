@@ -10,6 +10,66 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+
  *= require_self
  */
+ @import 'bootstrap';
+
+
+ p.navbar-brand {
+     font-size: 35px;
+ }
+ 
+ #yellow {
+     color:#FFD700;
+ }
+ 
+ #sign-in {
+    
+     // margin-left: 300px;
+ }
+ 
+ #bigger {
+     font-size: 2.5em;
+ }
+ 
+ .big {
+     font-size: 3.5em;
+ }
+ 
+ .gray {
+     background-color: gray;
+ }
+ 
+ #mission {
+     font-size: 1.5em;
+ }
+ 
+ #calculator-heading {
+     color: #993300;
+ }
+ 
+ th.right-margin {
+     padding-right: 20px;
+ }
+ 
+ td.center {
+     text-align: center;
+ }
+ td.right {
+     text-align: right;
+ }
+ 
+ div.increase {
+     margin: -10px;
+ }
+ 
+ li.comment {
+     color: #996600;
+ }
+ 
+ div#comment-results{
+     font-size: 1.5em;
+     color: white;
+     background-color: gray;
+ }
