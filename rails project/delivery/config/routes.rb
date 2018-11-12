@@ -7,11 +7,15 @@ Rails.application.routes.draw do
  
   root 'static_pages#home'
   get '/meals/most_ordered_meal', to:'meals#most_ordered_meal'
-  resources :comments
+  post '/orders/add', to:"orders#add"
+
   resources :meals do 
-    resources :orders 
+    resources :orders do 
+      resources :comments
+    end 
   end 
- 
+  
+  resources :comments, only: [:create, :show, :edit]
   resources :users
   resources :orders
 end 

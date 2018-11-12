@@ -10,6 +10,8 @@ class OrdersController < ApplicationController
   end
   
   def show
+    @order = Order.find(params[:id])
+    @comment = Comment.new 
     respond_to do |f|
       f.html 
       f.json {render json: @order}
@@ -70,7 +72,6 @@ end
         :quantity,
         :meal_id,
         :user_id
-
       )
   end
 

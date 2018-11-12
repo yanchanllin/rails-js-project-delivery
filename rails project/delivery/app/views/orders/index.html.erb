@@ -1,3 +1,7 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+<div id="comment-results">
+</div>
 
 <h1>Listing order</h1>
 
@@ -20,8 +24,9 @@
         <% else %>
           <td><%= link_to "Go on #{@meal.name}", order_path(order) %></td>
           <tr>
-
+          
           <td>quantity: <%= order.quantity %></td>
+          <td><%= link_to 'Find number of comments', order, class:"see" %></td>
         <% end %>
       </tr>
     <% end %>
