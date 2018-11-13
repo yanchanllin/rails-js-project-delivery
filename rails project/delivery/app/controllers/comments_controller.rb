@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     end
 
     def show
+      render json: @comment, status: 200
     end
 
     def new

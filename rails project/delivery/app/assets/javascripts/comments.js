@@ -63,7 +63,7 @@ $("#add-comment").submit(function(event){
         var newComment = new Comment(term)
         var commentHTML = newComment.format()
         var list = $("#comment-list");
-        list.append(commentHTML);
+        list.append("<li>"+commentHTML+"</li>");
     });
 });
 

@@ -14,8 +14,8 @@ Rails.application.routes.draw do
       resources :comments
     end 
   end 
-  
-  resources :comments, only: [:create, :show, :edit]
+
+  resources :comments
   resources :users
   resources :orders
 end 
