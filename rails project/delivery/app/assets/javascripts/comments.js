@@ -1,8 +1,9 @@
-document.addEventListener("turbolinks:load", function() {
-  
-
-
-
+$(document).ready(function(){
+    attachListeners();
+});  
+function attachListeners () { 
+    addComment()
+} 
     // var list = $("#comment-list");
     // list.append(`<li>Hello</li>`);
     // list.append(`<li>second Hello</li>`)
@@ -45,27 +46,26 @@ $("#calculate").click(function(){
     }
 });
 
-$("#add-comment").submit(function(event){
-    // Stop form from submitting normally
-    event.preventDefault();
+function addComment(){ 
+    $("#add-comment").click(function(event){
     
-    // Get some values from elements on the page:
-    var $form = $( this ),
-    token = $form.find("input[name='authenticity_token']").val(),
-    term = $form.find("textarea[name='content']").val(),
-    url = $form.attr("action");
-    
-    // Send the data using post
-    var posting = $.post(url, {content: term, authenticity_token: token});
-    
-    posting.done(function(data){
-   
-        var newComment = new Comment(term)
-        var commentHTML = newComment.format()
-        var list = $("#comment-list");
-        list.append("<li>"+commentHTML+"</li>");
-    });
-});
-
-
-});
+        // Stop form from submitting normally
+        event.preventDefault();
+        // Get some values from elements on the page:
+        var $form = $( this ),
+        token = $form.find("input[name='authenticity_token']").val(),
+        term = $form.find("textarea[name='content']").val(),
+        url = $form.attr("action");
+        
+        // Send the data using post
+        var posting = $.post(url, {content: term, authenticity_token: token});
+        
+        posting.done(function(data){
+       
+            var newComment = new Comment(term)
+            var commentHTML = newComment.format()
+            var list = $("#comment-list");
+            list.append("<li>"+commentHTML+"</li>");
+        });
+})
+}
