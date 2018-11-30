@@ -47,25 +47,28 @@ $("#calculate").click(function(){
 });
 
 function addComment(){ 
-    $("#add-comment").click(function(event){
-    
+    $("#new_comment").submit(function(event){ 
         // Stop form from submitting normally
         event.preventDefault();
+    
         // Get some values from elements on the page:
         var $form = $( this ),
         token = $form.find("input[name='authenticity_token']").val(),
-        term = $form.find("textarea[name='content']").val(),
+        term = $form.find("textarea[name='comment[content]']").val(),
         url = $form.attr("action");
         
         // Send the data using post
-        var posting = $.post(url, {content: term, authenticity_token: token});
-        
+        var posting = $.post(url,{
+            accepts: 'application/json',
+            data:{comment_content: term, authenticity_token: token} 
+        });
+        debugger
         posting.done(function(data){
-       
-            var newComment = new Comment(term)
+            
+            var newComment= data;
             var commentHTML = newComment.format()
             var list = $("#comment-list");
-            list.append("<li>"+commentHTML+"</li>");
+            list.append(commentHTML);
         });
 })
 }
