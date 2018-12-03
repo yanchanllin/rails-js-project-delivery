@@ -55,20 +55,25 @@ function addComment(){
         var $form = $( this ),
         token = $form.find("input[name='authenticity_token']").val(),
         term = $form.find("textarea[name='comment[content]']").val(),
-        url = $form.attr("action");
-        
+        url = $form.attr("action"),
+        orderid = $form.find("input[name='comment[order_id]']").val();
+    
         // Send the data using post
         var posting = $.post(url,{
             accepts: 'application/json',
-            data:{comment_content: term, authenticity_token: token} 
-        });
-        debugger
-        posting.done(function(data){
+            comment: {content:term, order_id: orderid},
             
-            var newComment= data;
-            var commentHTML = newComment.format()
-            var list = $("#comment-list");
-            list.append(commentHTML);
+            authenticity_token: token 
         });
+        
+        posting.done(function(data) {
+           console.log(data)
+            var comment = data;
+            console.log(comment.content)
+            $("#comment-list").append(`Name: ${comment.content}`);
+           
+        });
+        
 })
+
 }

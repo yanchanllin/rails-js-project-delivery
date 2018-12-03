@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     skip_before_action :verify_authenticity_token
     
     def index
-      @comment = current_user.comments.build
+      @comments = Comment.all
     end
 
     def show
@@ -24,15 +24,15 @@ class CommentsController < ApplicationController
   
       respond_to do |format|
         if @comment.save
-          format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-          format.json { render :show, status: :created, location: @comment }
+          @comments = Comment.all
+          format.json { render json: @comments }
         else
           format.html { render :new }
           format.json { render json: @comment.errors, status: :unprocessable_entity }
         end
       end
     end
-  
+    
     # PATCH/PUT /comments/1
     def update
       respond_to do |format|
