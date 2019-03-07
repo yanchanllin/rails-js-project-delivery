@@ -1,0 +1,10 @@
+<%= form_for(@order) do |f| %>    
+    <%= f.collection_select :meal_id, Meal.all, :id, :name %>
+    <%= f.select :quantity, options_for_select(1..500), { prompt: "quantity" } %>
+    <%= f.submit  %>
+  </div>
+<% end %>
+
+
+
+

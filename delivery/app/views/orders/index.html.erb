@@ -1,0 +1,45 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+<div id="comment-results">
+</div>
+
+<h1>Listing order</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><strong>Order</strong></td>
+    </tr>
+    <% @orders.each do |order| %>
+     
+        <% if current_user.admin %>
+        </div>
+          <td><%= link_to "Show #{@meal.name}", order_path(order) %></td>
+        <% else %>
+          <td><%= link_to "Go on #{@meal.name}", order_path(order) %></td>
+          <tr>
+          
+          <td>quantity: <%= order.quantity %></td>
+          <td><%= link_to 'Find number of comments', order, class:"see" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<% if @user %>
+  <p>
+    <%= link_to "Back to profile", user_path(@user), {:class => "btn btn-primary"} %>
+  </p>
+<% else %>
+  <p><%= link_to 'New Order', new_order_path %></p>
+<% end %>
+
+

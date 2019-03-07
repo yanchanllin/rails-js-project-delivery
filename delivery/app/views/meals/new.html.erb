@@ -1,0 +1,16 @@
+<h1>New meal</h1>
+
+<%= render 'form' %>
+
+<% if @meal.errors.any? %>
+<div id="error_explanation">
+
+
+<% @meal.errors.full_messages.each do |error| %>
+<h3><%= error %>, new meal was "NOT" saved</h3>
+
+<% end %>
+</div>
+<% end %>
+
+<p><%= link_to 'Meals Menu', meals_path %></p>
