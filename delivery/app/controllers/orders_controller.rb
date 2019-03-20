@@ -4,18 +4,21 @@ class OrdersController < ApplicationController
  def index
     @orders = Order.all 
     respond_to do |f|
-      f.html
+      f.html { render :index }
       f.json {render json: @orders}
     end 
   end
   
   def show
     @order = Order.find(params[:id])
-    @comment = Comment.new 
-    respond_to do |f|
-      f.html 
-      f.json {render json: @order}
-    end 
+    @meal = @order.meal
+    if current_user
+      @comment = current_user.comments.build(order: @order)
+    end
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json:  @order }
+    end
   end
 
   def new 

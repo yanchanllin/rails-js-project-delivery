@@ -4,26 +4,11 @@
 
   <div class="info">
 
-    <% current_user.admin || current_user.orders.include?(@order) %>
-      <%= link_to 'Edit', edit_order_path %></p>
-   
 
-  <br>
-<p class="text-info" id="comment-heading"> Comments </p>
-<ul id="comment-list">
 
-</ul>
-
-<%= form_for(@comment) do |f| %>
-  <%= f.hidden_field :order_id, value: @order.id %> 
-  <%= f.text_area :content, :cols =>10, :rows => 1%>
-  <%= f.submit "Submit", :id => "new_comment" %>
-<% end %>
-
-</div>
-
-<div class="comment-list"  >
-</div>
-
+        <%= submit_tag "Go on this meal", class:"btn btn-light" %>
+     
     
-  
+  </div>
+
+</div>
