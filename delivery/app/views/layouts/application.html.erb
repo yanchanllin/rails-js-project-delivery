@@ -1,44 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Delivery2</title>
+    <title>CustomFoodDeliveryRailsJSApp</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          
-        <a class="navbar-brand" href="<%= root_url %>"/>Home</a>
+    
+  <body id="<%= controller_name %>-<%= action_name %>">
+  <%= render 'layouts/navigation' %>
+  <%= render 'layouts/messages' %>
 
-        <% if !current_user %>
-          <a class="navbar-brand" href="<%= new_user_path %>"/>Sign Up</a>
-          <%= link_to "Log in", signin_path, class:"navbar-brand" %>
-          <%= link_to 'Add meal', new_meal_path %>
-        </div>
-          <%= link_to('Log in with Facebook!', '/auth/facebook') %>
-      
-        <% end %>
-        <% if current_user %>
-          <%= link_to "#{current_user.name}'s profile", user_path(current_user), class:"navbar-brand"%>
-          
-          
-        <% end %>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-
-    <!-- content -->
-    <div class="container"  role="main">
       <%= yield %>
-    </div>
+
   </body>
 </html>

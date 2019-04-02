@@ -10,10 +10,11 @@ class OrdersController < ApplicationController
   end
   
   def show
-    @order = Order.find(params[:id])
-    @meal = @order.meal
+    @order = Order.find_by(id: params[:id])
+    @meal = current_user.meals.build(users_orders)
+
     if current_user
-      @comment = current_user.comments.build(order: @order)
+      @comment = current_user.comments.build(order_id: @order.id)
     end
     respond_to do |format|
       format.html { render :show }

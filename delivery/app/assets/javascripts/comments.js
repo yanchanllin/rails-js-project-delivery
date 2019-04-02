@@ -28,24 +28,7 @@
 // //     }
 // // }
 
-// Comment.prototype.format = function() {
-//     return `<li class="comment"><strong>${this.content}</strong></li>`;
-// }
-// //new item page
-// $("#calculate").click(function(){
-    
-//     var grams = document.getElementById("grams").value;
-//     var pounds = document.getElementById("pounds").value;
-//     if (grams !== "") {
-//         document.getElementById("pounds").value = (parseFloat(grams) * 0.00220462).toString();
-//     }
-//     else if (pounds !== "") {    
-//         document.getElementById("grams").value = (parseFloat(pounds) * 453.592).toString();
-//     } else {
-//         alert("Enter a number for either grams or pounds");
-//     }
-// });
-
+//
 // function addComment(){ 
 //     $("#new_comment").submit(function(event){ 
 //         // Stop form from submitting normally

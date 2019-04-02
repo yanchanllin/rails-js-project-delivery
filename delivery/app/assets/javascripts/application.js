@@ -14,15 +14,15 @@
 //= require jquery_ujs
 
  //= require_tree .
-//= require comments
 
-
+ 
 $(function () {
     var orderArray = [];
     var id = parseInt($(".js-next").attr("data-id"));
   
-    if ($("#orderInfo").length) {
+    if ($("#userOrdersInfo").length) {
       loadAllOrders();
+      
     }
   
     function loadAllOrders() {
@@ -34,24 +34,28 @@ $(function () {
         .then(function(data) {
            orderArray = data;
            $.each(
-             orderArray, function(index, order) {
-               var orderData = "<p><a href='/orders/" + order.id + "'>"
-                + order.title + "</a><div id='content-" + order.id + "'>"
-                + order.content.substring(0, 250) + "..."
+             orderArray, function(index,order) {
+               var orderData = "<p><a href='/orders/" + "'>"
+                + 'order'+ ": " +(index+1) + "</a><div id='quantity-" + "'>"
                 + "<a href='#' data-id='" + order.id + "' class='js-more'>Read More</a></div><br>";
-               $('#ordersInfo').append(orderData);
-             }
-           )
+               $('#userOrdersInfo').append(orderData);
+               $(".js-more").on('click', function() {
+                let id = $(this).data("id");
+                $.get("/orders/" + id + "/body", function(data) {
+                  alert(data);
+                });
+              });
+            });
          });
-      }
+      } 
 
       // For the orders index page
 
-  $("#ordersInfo").on('click', '.js-more', function(e) {
+  $("#userOrdersInfo").on('click', '.js-more', function(e) {
     e.preventDefault();
-    var id = this.dataset.id;
+    var id = this.dataset.index;
     $.get("/orders/" + id + ".json", function(data) {
-      $("#content-" + id).html(data.content)
+      $("#quantity-" + id).html(data.quantity)
     });
   });
 
@@ -59,9 +63,9 @@ $(function () {
 
   $("#userOrdersInfo").on('click', '.js-more', function(e) {
     e.preventDefault();
-    var id = this.dataset.id;
+    var id = this.dataset.index;
     $.get("/orders/" + id + ".json", function(data) {
-     $("#content-" + id).html(data.content);
+     $("#quantity-" + id).html(data.quantity);
 
     });
   });
@@ -72,7 +76,7 @@ $(function () {
     e.preventDefault();
     var id = this.dataset.id;
     $.get("/orders/" + id + ".json", function(data) {
-     $("#content-" + id).html(data.content);
+     $("#quantity-" + id).html(data.quantity);
 
     });
   });
@@ -86,7 +90,7 @@ $(function () {
     $(".orderUserName").text(data["user"]["name"]);
     $(".orderFoodName").text(data["food"]["name"]);
     $(".orderFoodCategory").text(data["food"]["category"]);
-    $(".orderContent").text(data["content"]);
+    $(".orderquantity").text(data["quantity"]);
     $(".orderRecommendation").text(data["recommendation"]);
     $(".js-next").attr("data-id", data["id"]);
     $(".js-previous").attr("data-id",data["id"]);
@@ -124,34 +128,43 @@ $(".js-previous").on("click", function(event) {
 
 function Comment(data) {
 this.id = data.id;
-this.content = data.content;
+this.quantity = data.quantity;
 this.user = data.user;
 }
 
 Comment.prototype.renderDisplay = function() {
   var html = "" ;
-  html += "<div class=\'well well-white\' id=\'comment-\' + comment.id + '\'>" +  "<strong>" + this.user.name + "</strong>" + " says: " + this.content + "</div>";
+  html += "<div class=\'well well-white\' id=\'comment-\' + comment.id + '\'>" +  "<strong>" + this.user.name + "</strong>" + " says: " + this.quantity + "</div>";
   $("#submitted-comments").append(html);
 }
 
-$(function() {
-  $("form#new_comment").on("submit", function(event) {
-    event.preventDefault();
-    var $form = $(this);
-    var action = $form.attr("action");
-    // in order to process the comment(form data), its need to be converted from an object to a string.
-    var params = $form.serialize();
-    $.ajax({
-      url: action,
-      data: params,
-      dataType: "json",
-      method: "POST"
-    })
-    .success(function(json) {
-      $(".commentBox").val("");
-      var comment = new Comment(json);
-      comment.renderDisplay();
+function addComment(){ 
+  $("#new_comment").submit(function(event){ 
+      // Stop form from submitting normally
+      event.preventDefault();
+  
+      // Get some values from elements on the page:
+      var $form = $( this ),
+      token = $form.find("input[name='authenticity_token']").val(),
+      term = $form.find("textarea[name='comment[content]']").val(),
+      url = $form.attr("action"),
+      orderid = $form.find("input[name='comment[order_id]']").val();
+  
+      // Send the data using post
+      var posting = $.post(url,{
+          accepts: 'application/json',
+          comment: {content:term, order_id: orderid},
+          
+          authenticity_token: token 
+      });
+      
+      posting.done(function(data) {
+         console.log(data)
+          var comment = data;
+          console.log(comment.content)
+          $("#comment-list").append(`Name: ${comment.content}`);
+         
+      });
+      })
 
-    })
-  })
-})
+}
