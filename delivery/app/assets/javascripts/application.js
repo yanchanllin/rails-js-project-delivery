@@ -39,21 +39,15 @@ $(function () {
                 + 'order'+ ": " +(index+1) + "</a><div id='quantity-" + "'>"
                 + "<a href='#' data-id='" + order.id + "' class='js-more'>Read More</a></div><br>";
                $('#userOrdersInfo').append(orderData);
-               $(".js-more").on('click', function() {
-                let id = $(this).data("id");
-                $.get("/orders/" + id + "/body", function(data) {
-                  alert(data);
                 });
               });
-            });
-         });
       } 
 
       // For the orders index page
 
-  $("#userOrdersInfo").on('click', '.js-more', function(e) {
+  $("#order-index").on('click', '.js-more', function(e) {
     e.preventDefault();
-    var id = this.dataset.index;
+    var id = this.dataset.id;
     $.get("/orders/" + id + ".json", function(data) {
       $("#quantity-" + id).html(data.quantity)
     });
@@ -63,7 +57,7 @@ $(function () {
 
   $("#userOrdersInfo").on('click', '.js-more', function(e) {
     e.preventDefault();
-    var id = this.dataset.index;
+    var id = this.dataset.id;
     $.get("/orders/" + id + ".json", function(data) {
      $("#quantity-" + id).html(data.quantity);
 
@@ -72,7 +66,7 @@ $(function () {
 
   // For the Users Show Page
 
-  $("#userOrdersShowInfo").on('click', '.js-more', function(e) {
+  $("#userShowInfo").on('click', '.js-more', function(e) {
     e.preventDefault();
     var id = this.dataset.id;
     $.get("/orders/" + id + ".json", function(data) {

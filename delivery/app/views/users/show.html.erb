@@ -13,14 +13,9 @@
     <div class=" well col-sm-10">
     <div id="userOrdersInfo"class=" well col-sm-10">
     <h4>Your Orders:</h4>
-    <% @user.orders.each do |order| %>
-      <li><%= order.meal.name %></br>
-      quantity: <%= order.quantity %></li>
-    
-     <br />
-     <br />
-   <% end %> </ol>
-
+    <p><%= link_to 'View Order', orders_path %></td>
+    </div>
+ 
   </div>
   </div>
   

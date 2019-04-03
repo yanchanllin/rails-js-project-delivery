@@ -10,12 +10,11 @@ class OrdersController < ApplicationController
   end
   
   def show
-    @order = Order.find_by(id: params[:id])
-    @meal = current_user.meals.build(users_orders)
-
-    if current_user
-      @comment = current_user.comments.build(order_id: @order.id)
-    end
+    @order = Order.find(params[:id])
+    @meal = @order.meal
+    # if current_user
+    #   @comment = current_user.comments.build(order: @order)
+    # end
     respond_to do |format|
       format.html { render :show }
       format.json { render json:  @order }
@@ -79,8 +78,8 @@ end
       )
   end
 
-  def comment_params
-    params.require(:comment).permit(:content)
-  end
+  # def comment_params
+  #   params.require(:comment).permit(:content)
+  # end
 
 end

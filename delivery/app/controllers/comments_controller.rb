@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
     before_action :set_comment, only: [:show, :edit, :update, :destroy]
     skip_before_action :verify_authenticity_token
-    
+
     def index
       @comments = Comment.all
     end
@@ -17,20 +17,15 @@ class CommentsController < ApplicationController
     
     def edit
     end
-  
-    
+   
     def create
       @comment = Comment.new(comment_params)
-  
-      respond_to do |format|
-        if @comment.save
-          @comments = Comment.all
-          format.json { render json: @comments }
-        else
-          format.html { render :new }
-          format.json { render json: @comment.errors, status: :unprocessable_entity }
-        end
-      end
+      @comment.order = @order
+      if @comment.save
+      render json: @comment, status: 201
+    else
+      render json: {errors: @comment.errors.full_messages}, status: 400
+     end
     end
     
     # PATCH/PUT /comments/1

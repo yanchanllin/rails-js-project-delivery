@@ -5,10 +5,29 @@
   <div class="info">
 
 
-
-        <%= submit_tag "Go on this meal", class:"btn btn-light" %>
-     
-    
+  <h4>Order:</h4>
+    <p><%= link_to @order.meal.name, orders_path(@order) %>
+    </div>
+ 
+  <%= link_to 'Edit', edit_order_path(@order) %> | <%= link_to 'Back', orders_path %>
   </div>
+
+  
+  <h1>Comments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  
+<br>
+
+<%= link_to 'New Comment', new_comment_path %>
+
+    </div>
 
 </div>
