@@ -12,9 +12,6 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @meal = @order.meal
-    # if current_user
-    #   @comment = current_user.comments.build(order: @order)
-    # end
     respond_to do |format|
       format.html { render :show }
       format.json { render json:  @order }

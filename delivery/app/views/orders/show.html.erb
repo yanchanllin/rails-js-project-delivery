@@ -6,7 +6,8 @@
 
 
   <h4>Order:</h4>
-    <p><%= link_to @order.meal.name, orders_path(@order) %>
+    <p><%= @order.meal.name %>
+    <p>quantity:<%= @order.quantity %></p>
     </div>
  
   <%= link_to 'Edit', edit_order_path(@order) %> | <%= link_to 'Back', orders_path %>
@@ -18,7 +19,8 @@
 <table>
   <thead>
     <tr>
-      <th>Content</th>
+      <th>Content:</th>
+      
       <th colspan="3"></th>
     </tr>
   </thead>
