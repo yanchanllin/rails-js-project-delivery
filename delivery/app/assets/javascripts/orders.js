@@ -1,54 +1,58 @@
 $(function () {
     console.log("orders.js loaded ...")
-    listenForClick
+    listenForClick()
+
 });
 
-function listenForClick(){
-    $('button#ordersInfo').on('click',function(event){
+function listenForClick() {
+    $('button#orders-data').on('click', function (event) {
         event.preventDefault()
         getOrders()
+        console.log('you just hit orders')
     })
 }
 
 function getOrders() {
-	$.ajax({
-           url: "http://localhost:3000/orders",
-           method: 'get',
-           dataType: 'json'
+    $.ajax({
+        url: "http://localhost:3000/orders",
+        method: 'get',
+        dataType: 'json'
     }).done(function (response) {
+        // $('button#orders-data').json(response)
 
-		console.log("response: ", response);
+        console.log("response: ", response);
 
-		
 
-        let myOrder = new Order(response[0])
-        debugger
-		let myOrderHTML = myOrder.orderHTML()
-        // $('div#ajax-orders').html(myOrderHTML)
-        document.getElementById('ajax-orders').innerHTML += myOrderHTML
-		// debugger;
-	})
+        response.map(order => {
+            let myOrder = new Order(order[0])
+
+            let myOrderHTML = myOrder.orderHTML()
+            // $('div#ajax-orders').html(myOrderHTML)
+            document.getElementById('ajax-orders').innerHTML += myOrderHTML
+            // debugger;
+        })
+    })
 }
 
 class Order {
-	constructor(obj) {
-		this.id = obj.id
+    constructor(obj) {
+        this.id = obj.id
         this.quantity = obj.quantity
         this.meal_id = obj.meal_id
-		this.user_id = obj.user_id
-		this.comments = obj.comments
-	}
+        this.user_id = obj.user_id
+        this.comments = obj.comments
+    }
 }
 
 Order.prototype.orderHTML = function () {
     return (`
        <div>${this.id}</div>
-		<div>${this.quantity}</div>
+        <div>${this.quantity}</div>
 	`)
 }
 
 Order.prototype.newOrderForm = function () {
-	return (`
+    return (`
 		<form>new order form</form>
 	`)
 }

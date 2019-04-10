@@ -53,7 +53,7 @@ end
 
   def destroy
     order = Order.find_by(id: params[:id])
-     order.destroy(order_params)
+     order.destroy
     flash[:notice] = 'Order was successfully destroyed.' 
     redirect_to user_path(current_user)
   end
@@ -68,15 +68,16 @@ end
 
   private
   def order_params
-    params.require(:order).permit(
+    params.permit(
         :quantity,
         :meal_id,
         :user_id
       )
   end
+  
 
-  # def comment_params
-  #   params.require(:comment).permit(:content)
-  # end
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
 
 end
