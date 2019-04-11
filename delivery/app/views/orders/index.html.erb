@@ -16,10 +16,9 @@
     <% @orders.each do |order| %>
       <tr>
       <td><%= order.id %>.</td>
-      <td><%= order.meal.name %></td>
-      <td><%= link_to 'Show', order %></td>
+      <td><%= link_to(order.meal.name,order,class:"show_link", id:"data-id")%></td>
       <td><%= link_to 'Edit', edit_order_path(order) %></td>
-      <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -27,13 +26,9 @@
 
 <br>
 
-<%= link_to 'New order', new_order_path %>
-
-
 <h1 class='subtitle'>Ajax Order</h1>
 
   <button id="orders-data">Get Orders</button>
-  <div id="ajax-orders">[orders...]</div>
+  <div id="ajax-orders"></div>
 
-  <button id="ajax-new-order">New Order</button>
-  <div id="new-order-form-div">[form..]</div>
+ 
