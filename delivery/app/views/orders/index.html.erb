@@ -16,7 +16,7 @@
     <% @orders.each do |order| %>
       <tr>
       <td><%= order.id %>.</td>
-      <td><%= link_to(order.meal.name,order,class:"show_link", id:"data-id")%></td>
+      <td><%= link_to(order.meal.name,order)%></td>
       <td><%= link_to 'Edit', edit_order_path(order) %></td>
       <td><%= link_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

@@ -1,5 +1,5 @@
 class OrderSerializer < ActiveModel::Serializer
-    attributes :quantity, :user_id
+    attributes :quantity
     
     belongs_to :meal
   belongs_to :user

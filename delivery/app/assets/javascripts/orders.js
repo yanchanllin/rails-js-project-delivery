@@ -1,7 +1,7 @@
 $(function () {
     console.log("orders.js loaded ...")
     listenForClick()
-    // listenForNewOrderFormClick()
+    listenForNewOrderFormClick()
 });
 
 function listenForClick() {
@@ -30,25 +30,26 @@ function getOrders() {
             document.getElementById('ajax-orders').innerHTML = myOrderHTML
         })
     })
-    $(document).on('click', ".show_link", function (e) {
-        e.preventDefault()
-        $('div#notice.container').html('')
-        let id = $(this).attr('data-id')
-        fetch('/orders/${id}.json')
+    // $(document).on('click', ".show_link", function (e) {
+    //     e.preventDefault()
+    //     // history.pushState(null, null, "${id}")
+    //     $('div#notice.container').html('')
+    //     let id = $(this).attr('data-id')
+    //     fetch('/orders/${id}.json')
+    //         .then(res => res.json())
+    //         .then(order => {
+    //             console.log(order)
 
-            .then(order => order.json)
-            .then(one => {
-                //console.log(order)
-                let myOrder = new Order(one)
-                console.log(myOrder)
-                let orderHTML = myOrder.formatShow()
+    //             let myOrder = new Order(order)
+    //             console.log(myOrder)
+    //             let orderHTML = myOrder.formatShow()
 
-                //console.log('you just hit getOrders ')
-                // clearout pg
-                $('div#notice.container').append(orderHTML)
+    //             //console.log('you just hit getOrders ')
+    //             // clearout pg
+    //             $('div#notice.container').append(orderHTML)
 
-            })
-    })
+    //         })
+    // })
 }
 
 function listenForNewOrderFormClick() {
@@ -67,42 +68,46 @@ class Order {
         this.meal = obj.meal
         this.user = obj.user
     }
-    // static newOrderForm() {
-    //     return (`
+    static newOrderForm() {
+        return (`
 
-    //  <form class="new_order" id="new_order" action="/orders" method="post">
-    //  <input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="qfhU44jawhG7iYV6/y0aEq0JirCOVhMJtou6Odagf2U2n20SNT7m5W7VjyUMYn2VgyMzQrqmHuDTpsNtZY7JPg==" />    
-    //  Order: <input type="text" name="ordernameform">
-    //  quantity:<input type="text" name="quantityform">
-    //          <input type="submit" name="commit" value="Create Order" />
-    // </form>
-    //       `)
-    // }
+     <form>    
+     Order: <input type="text" name="ordernameform">
+     quantity:<input type="text" name="quantityform">
+             <input type="submit" name="commit" value="Create Order" />
+    </form>
+          `)
+    }
 }
 
 
 Order.prototype.orderHTML = function () {
-
     let orderComments = this.comments.map(comment => {
         return (`
           <p>${comment.content}</p>      
     `)
     }).join('')
 
-    return (`
-        <div>meal:${this.meal.name}</div>
+    let orderHTML = `
+    <a href="/orders/${this.id}" data-id="${this.id}" class="show_link">
+    <h2>${this.meal.name}</h2></a>
         <div>quantity:${this.quantity}</div> 
         <div>comments:${orderComments}</div>
-        
-	`)
+        `
+    return orderHTML
 }
 
 Order.prototype.formatShow = function () {
+    let orderComments = this.comments.map(comment => {
+        return (`
+          <p>${comment.content}</p>      
+    `)
+    }).join('')
 
-
-    return (`
-        <div>meal:${this.meal.name}</div>
+    let orderHTML = `
+        <h2>${this.meal.name}</h2>
         <div>quantity:${this.quantity}</div> 
-        
-        `)
+        <div>comments:${orderComments}</div>     
+    `
+    return orderHTML
 }
