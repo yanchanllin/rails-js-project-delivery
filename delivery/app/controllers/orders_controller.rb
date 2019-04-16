@@ -10,8 +10,8 @@ class OrdersController < ApplicationController
   end
   
   def show
-    @order = Order.find_by(id: params[:id])
-    @meal = Order.find_by_id(params[:meal_id])
+    @order = Order.find(params[:id])
+    @meal = @order.meal
     respond_to do |format|
       format.html { render :show }
       format.json { render json:  @order }
@@ -70,7 +70,7 @@ end
   def order_params
     params.permit(
         :quantity,
-        :meal.permit(:name), 
+        :meal, 
         :user_id
       )
   end

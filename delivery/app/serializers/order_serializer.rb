@@ -1,9 +1,9 @@
 class OrderSerializer < ActiveModel::Serializer
-    attributes :quantity, :id
-    
+    attributes :id, :quantity
+    belongs_to :user
     belongs_to :meal
-  belongs_to :user
-  has_many :comments
+  
+    has_many :comments
 
     # def comment_list
     #   object.comments.map do |comment|
