@@ -2,23 +2,41 @@ $(function () {
     console.log("orders.js loaded ...")
     listenForClick()
     // listenForShowClick()
-    // listenForNewOrderFormClick()
+    listenForNewOrderFormClick()
 });
 
 function listenForClick() {
     $('button#orders-data').on('click', function (event) {
         event.preventDefault()
         getOrders()
-        // showNewOrderForm()
     })
 }
 
-// function listenForShowClick() {
-//     $('data-id').on('click', function (event) {
-//         event.preventDefault()
-//         showOrders()
-//     })
-// }
+function listenForNewOrderFormClick() {
+    $('button#ajax-new-order').on('click', function (event) {
+        event.preventDefault()
+        let newOrderForm = Order.newOrderForm()
+        document.querySelector('div#new-order-form-div').innerHTML = newOrderForm
+    })
+}
+
+$('button#ajax-new-order').on('submit', function (e) {
+    e.preventDefault()
+
+    const values = $(this).serialize()
+
+    $.order("/orders", values).done(function (data) {
+        $("div#notice.container").html("")
+        const newOrder = new Order(data)
+        const htmlToAdd = newOrder.formatShow()
+
+        $("div#notice.container").html("htmlToAdd ")
+        console.log("new order")
+    })
+})
+
+
+
 
 function getOrders() {
     $.ajax({
@@ -50,7 +68,7 @@ function getOrders() {
 
             console.log("response: ", response);
             response.map(order => {
-                let myOrder = new Order(response[0])
+                let myOrder = new Order(response)
                 console.log(myOrder)
                 let orderHTML = myOrder.formatShow()
 
@@ -74,16 +92,15 @@ class Order {
         this.meal = obj.meal
         this.comments = obj.comments
     }
-    // static newOrderForm() {
-    //     return (`
-
-    //  <form>    
-    //  Order: <input type="text" name="ordernameform">
-    //  quantity:<input type="text" name="quantityform">
-    //          <input type="submit" name="commit" value="Create Order" />
-    // </form>
-    //       `)
-    // }
+    static newOrderForm() {
+        return (`
+     <form>    
+     Order: <input type="text" name="ordernameform">
+     quantity:<input type="text" name="quantityform">
+             <input type="submit" name="commit" value="Create Order">
+    </form>
+          `)
+    }
 }
 
 
@@ -116,3 +133,10 @@ Order.prototype.formatShow = function () {
     `
     return orderHTML
 }
+
+// function listenForShowClick() {
+//     $('data-id').on('click', function (event) {
+//         event.preventDefault()
+//         showOrders()
+//     })
+// }

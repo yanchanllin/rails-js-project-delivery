@@ -25,9 +25,13 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     current_user.orders << @order
-    @order.save 
-      flash[:notice] = 'Order was successfully created.'
-      redirect_to user_path(current_user)
+    if @order.save 
+      flash[:notice] = 'Order was successfully created'
+      # redirect_to user_path(current_user)
+      render json: @order
+    else 
+      render 'new'
+    end 
   end
 
 def highest_ordered
