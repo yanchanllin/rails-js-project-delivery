@@ -1,7 +1,6 @@
 $(function () {
     console.log("orders.js loaded ...")
     listenForClick()
-    // listenForShowClick()
     listenForNewOrderFormClick()
 });
 
@@ -22,21 +21,15 @@ function listenForNewOrderFormClick() {
 
 $('button#ajax-new-order').on('submit', function (e) {
     e.preventDefault()
-
     const values = $(this).serialize()
-
     $.order("/orders", values).done(function (data) {
         $("div#notice.container").html("")
         const newOrder = new Order(data)
         const htmlToAdd = newOrder.formatShow()
-
         $("div#notice.container").html("htmlToAdd ")
         console.log("new order")
     })
 })
-
-
-
 
 function getOrders() {
     $.ajax({
@@ -44,14 +37,10 @@ function getOrders() {
         method: 'get',
         dataType: 'json'
     }).done(function (response) {
-        // $('button#orders-data').json(response)
-
         console.log("response: ", response);
-
 
         response.map(order => {
             let myOrder = new Order(order)
-
             let myOrderHTML = myOrder.orderHTML()
             document.getElementById('ajax-orders').innerHTML += myOrderHTML
         })
@@ -59,31 +48,29 @@ function getOrders() {
     $(document).on('click', ".show_link", function (e) {
         e.preventDefault()
         $('div#notice.container').html('')
+        // debugger
         let id = $(this).attr('data-id')
-
         $.ajax({
+            method: 'get',
             url: "http://localhost:3000/orders.json",
-            method: 'get'
-        }).done(function (response) {
+            success: function (response) {
+                console.log("response: ", response);
+                response.map(order => {
+                    let myOrder = new Order(response[0])
+                    console.log(myOrder)
+                    let orderHTML = myOrder.formatShow()
 
-            console.log("response: ", response);
-            response.map(order => {
-                let myOrder = new Order(response)
-                console.log(myOrder)
-                let orderHTML = myOrder.formatShow()
+                    console.log('you just hit showOrders')
+                    // clearout pg
+                    $('div#notice.container').append(orderHTML)
+                })
 
-                // console.log('you just hit showOrders')
-                // clearout pg
-                // 'div#notice.container'
-                $('div#notice.container').append(orderHTML)
-                // $('data-id').innerHTML = orderHTML
-            })
+            }
+
+
         })
     })
-
 }
-
-
 
 class Order {
     constructor(obj) {
@@ -102,7 +89,6 @@ class Order {
           `)
     }
 }
-
 
 Order.prototype.orderHTML = function () {
     let orderComments = this.comments.map(comment => {
