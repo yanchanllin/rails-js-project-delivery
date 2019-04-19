@@ -11,26 +11,6 @@ function listenForClick() {
     })
 }
 
-function listenForNewOrderFormClick() {
-    $('button#ajax-new-order').on('click', function (event) {
-        event.preventDefault()
-        let newOrderForm = Order.newOrderForm()
-        document.querySelector('div#new-order-form-div').innerHTML = newOrderForm
-    })
-}
-
-$('button#ajax-new-order').on('submit', function (e) {
-    e.preventDefault()
-    const values = $(this).serialize()
-    $.order("/orders", values).done(function (data) {
-        $("div#notice.container").html("")
-        const newOrder = new Order(data)
-        const htmlToAdd = newOrder.formatShow()
-        $("div#notice.container").html("htmlToAdd ")
-        console.log("new order")
-    })
-})
-
 function getOrders() {
     $.ajax({
         url: "http://localhost:3000/orders",
@@ -45,33 +25,28 @@ function getOrders() {
             document.getElementById('ajax-orders').innerHTML += myOrderHTML
         })
     })
-    $(document).on('click', ".show_link", function (e) {
-        e.preventDefault()
-        $('div#notice.container').html('')
-        // debugger
-        let id = $(this).attr('data-id')
-        $.ajax({
-            method: 'get',
-            url: "http://localhost:3000/orders.json",
-            success: function (response) {
-                console.log("response: ", response);
-                response.map(order => {
-                    let myOrder = new Order(response[0])
-                    console.log(myOrder)
-                    let orderHTML = myOrder.formatShow()
+}
+$(document).on('click', ".show_link", function (e) {
+    e.preventDefault()
+    $('div#notice.container').html('')
+    let id = $(this).attr('data-id')
+    getOrderShow(id)
+})
 
-                    console.log('you just hit showOrders')
-                    // clearout pg
-                    $('div#notice.container').append(orderHTML)
-                })
+const getOrderShow = (id) => {
+    $.ajax({
+        url: `http://localhost:3000/orders/${id}.json`,
+        method: 'get'
+    }).done(function (response) {
+        console.log("response: ", response);
 
-            }
+        let myOrder = new Order(response)
+        let orderHTML = myOrder.formatShow()
 
-
-        })
+        // clearout pg
+        $('div#notice.container').append(orderHTML)
     })
 }
-
 class Order {
     constructor(obj) {
         this.id = obj.id
@@ -89,7 +64,6 @@ class Order {
           `)
     }
 }
-
 Order.prototype.orderHTML = function () {
     let orderComments = this.comments.map(comment => {
         return (`
@@ -98,7 +72,8 @@ Order.prototype.orderHTML = function () {
     }).join('')
 
     let orderHTML = `
-    <a href="/orders/${this.id}"data-id="${this.id}" class="show_link"><h2>${this.meal.name}</h2></a>
+    <a href="/orders/${this.id}" data-id="${this.id}" class="show_link">
+          <h2>${this.meal.name}</h2></a>
         <div>quantity:${this.quantity}</div> 
          <div>comments:${orderComments}</div> 
         `
@@ -119,6 +94,25 @@ Order.prototype.formatShow = function () {
     `
     return orderHTML
 }
+
+function listenForNewOrderFormClick() {
+    $('button#ajax-new-order').on('click', function (event) {
+        event.preventDefault()
+        let newOrderForm = Order.newOrderForm()
+        document.querySelector('div#new-order-form-div').innerHTML = newOrderForm
+    })
+}
+$('button#ajax-new-order').on('submit', function (e) {
+    e.preventDefault()
+    const values = $(this).serialize()
+    $.order("/orders", values).done(function (data) {
+        $("div#notice.container").html("")
+        const newOrder = new Order(data)
+        const htmlToAdd = newOrder.formatShow()
+        $("div#notice.container").html("htmlToAdd ")
+        console.log("new order")
+    })
+})
 
 // function listenForShowClick() {
 //     $('data-id').on('click', function (event) {
