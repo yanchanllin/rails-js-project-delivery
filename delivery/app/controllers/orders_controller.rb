@@ -22,20 +22,14 @@ class OrdersController < ApplicationController
   end
   
   def create
-    @order = current_user.orders.new(order_params)
-    if @order.save 
+    @order = current_user.orders.build(order_params)
+    if @order.save! 
       render json: @order
     else 
       render 'new'
     end 
   end
-   # def create
-  #   # binding.pry
-  #   @order = Order.new(order_params)
-  #   current_user.orders << @order
-  #   @order.save 
-  #   redirect_to user_path(current_user)
-  # end
+   
 def highest_ordered
   @orders = Order.all
 

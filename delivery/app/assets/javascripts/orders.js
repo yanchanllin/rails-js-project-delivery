@@ -3,32 +3,42 @@ $(function () {
     listenForClick()
 });
 
-$(document).on('click', "#new_order", function (e) {
-    debugger
-    e.preventDefault()
-    const values = $(this).serialize()
-
-    $.order("/orders", values).done(function (data) {
-        $("div#notice.container").html("")
-        const newOrder = new Order(data)
-        const htmlToAdd = newOrder.formatShow()
-        $("div#notice.container").html("htmlToAdd ")
-        console.log("new order")
-    })
-})
-
 function listenForClick() {
     $('button#orders-data').on('click', function (event) {
         event.preventDefault()
         getOrders()
     })
+
+    $(document).on('click', ".show_link", function (e) {
+        e.preventDefault()
+        $('div#notice.container').html('')
+        let id = $(this).attr('data-id')
+        getOrderShow(id)
+    })
+
+    $(document).on('click', "#next-order", function () {
+        let id = $(this).attr('data-id')
+        fetch('orders/${id}/next')
+    })
+    $("#new_order").on("submit", function (e) {
+        // debugger
+        e.preventDefault()
+        $("form#new_order.new_order").html("")
+        const values = $(this).serialize()
+        newOrder(values)
+    })
 }
-$(document).on('click', ".show_link", function (e) {
-    e.preventDefault()
-    $('div#notice.container').html('')
-    let id = $(this).attr('data-id')
-    getOrderShow(id)
-})
+
+const newOrder = (values) => {
+    $.get("/orders").done(function (data) {
+        console.log(data)
+        const newOrder = new Order(data)
+        // console.log(newOrder)
+        const htmlToAdd = newOrder.formatShow()
+        $("form#new_order.new_order").html(htmlToAdd)
+
+    })
+}
 
 const getOrderShow = (id) => {
     $.ajax({
@@ -94,16 +104,17 @@ Order.prototype.orderHTML = function () {
 }
 
 Order.prototype.formatShow = function () {
-    let orderComments = this.comments.map(comment => {
-        return (`
-          <p>${comment.content}</p>      
-    `)
-    }).join('')
+    // let orderComments = this.comments.map(comment => {
+    //     return (`
+    //       <p>${comment.content}</p>      
+    // `)
+    // }).join('')
 
     let orderHTML = `
-        <h2>${this.meal.name}</h2>
+        
         <div>quantity:${this.quantity}</div> 
-        // <div>comments:${orderComments}</div>     
+        
+        <button class="next-order">Next</button>   
     `
     return orderHTML
 }
