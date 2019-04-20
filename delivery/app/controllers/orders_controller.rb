@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  
 
  def index
     @orders = Order.all 
@@ -21,19 +20,22 @@ class OrdersController < ApplicationController
   def new 
     @order = Order.new
   end
-
+  
   def create
-    @order = Order.new(order_params)
-    current_user.orders << @order
+    @order = current_user.orders.new(order_params)
     if @order.save 
-      flash[:notice] = 'Order was successfully created'
-      # redirect_to user_path(current_user)
       render json: @order
     else 
       render 'new'
     end 
   end
-
+   # def create
+  #   # binding.pry
+  #   @order = Order.new(order_params)
+  #   current_user.orders << @order
+  #   @order.save 
+  #   redirect_to user_path(current_user)
+  # end
 def highest_ordered
   @orders = Order.all
 

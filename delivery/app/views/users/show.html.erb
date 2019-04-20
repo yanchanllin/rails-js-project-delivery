@@ -1,22 +1,33 @@
 <p id="notice"><%= notice %></p>
 
+
+
+<% if flash[:message] %>
+  <div class="center alert">
+    <p><%= flash[:message] %></p>
+  </div>
+<% end %>
+
 <div class="center">
 
   <div< class="info">
     <% if @user.admin %>
       <p><strong>ADMIN</strong></p>
-</div>
-
-</div>
     <% end %>
     <p><strong>User Name:</strong> <%= @user.name %></p>  
-    <div class=" well col-sm-10">
-    <div id="userOrdersInfo"class=" well col-sm-10">
-    <h4>Your Orders:</h4>
-    <p><%= link_to 'View Order', orders_path %></td>
-    </div>
- 
-  </div>
-  </div>
+    <p>Orders:</p>
+    
+    <ol><% @user.orders.each do |order| %> 
+      <li><%= order.meal.name %></br>
+       quantity: <%= order.quantity %></li>
+      <%= link_to 'Edit', edit_order_path(order) %>
+      <br />
+      <br />
+    <% end %>
   
+  </ol>
+    <p><%= link_to 'Add order', new_order_path %></p>
    
+    
+  </div>
+</div>
