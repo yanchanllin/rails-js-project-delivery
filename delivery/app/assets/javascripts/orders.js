@@ -90,15 +90,17 @@ Order.prototype.orderHTML = function () {
 }
 
 Order.prototype.formatShow = function () {
-    // let orderComments = this.comments.map(comment => {
-    //     return (`
-    //       <p>${comment.content}</p>      
-    // `)
-    // }).join('')
+    let orderComments = this.comments.map(comment => {
+        return (`
+          <p>${comment.content}</p>      
+    `)
+    }).join('')
 
     let orderHTML = `
     
+    <h2>${this.meal.name}</h2></a>
     <div>quantity:${this.quantity}</div> 
+     <div>comments:${orderComments}</div> 
     
         <button class="next-order">Next</button>   
     `
