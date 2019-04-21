@@ -1,3 +1,4 @@
+<body style="background-color:powderblue;">
 <p id="notice"><%= notice %></p>
 <% if flash[:message] %>
   <div class="center alert">
@@ -11,14 +12,16 @@
       <p><strong>ADMIN</strong></p>
     <% end %>
   <p><strong>User Name:</strong> <%= @user.name %></p>  
-   <p>Orders:</p>
+  <div style="text-align:center;">
+   <h1 style="font-size:160%;color:orange;">Orders:</h1>
     <ol><% @user.orders.each do |order| %> 
       <li><%= order.meal.name %></br>
        quantity: <%= order.quantity %></li>
       <%= link_to 'Edit', edit_order_path(order) %>
     <% end %></ol>
-     <br />
       <br />
     <p><%= link_to 'Add order', new_order_path %></p>
   </div>
 </div>
+</div>
+</body>

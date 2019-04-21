@@ -1,11 +1,13 @@
-
-<%= form_for @order,:html => {:id => "new_order"} do |f| %>    
+<body style="background-color:powderblue;">
+<div style="text-align:center;">
+<div><%= form_for @order,:html => {:id => "new_order"} do |f| %>    
     <%= f.collection_select :meal, Meal.all, :id, :name %>
     <%= f.select :quantity, options_for_select(1..35), { prompt: "quantity" } %>
     <%= f.submit  %>
   </div>
 <% end %>
-
+</div>
+</body>
 
 
 
