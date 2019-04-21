@@ -23,20 +23,15 @@ function listenForClick() {
     $("#new_order").on("submit", function (e) {
         // debugger
         e.preventDefault()
-        $("form#new_order.new_order").html("")
         const values = $(this).serialize()
-        newOrder(values)
-    })
-}
 
-const newOrder = (values) => {
-    $.get("/orders").done(function (data) {
-        console.log(data)
-        const newOrder = new Order(data)
-        // console.log(newOrder)
-        const htmlToAdd = newOrder.formatShow()
-        $("form#new_order.new_order").html(htmlToAdd)
-
+        $.get("/orders", values).done(function (data) {
+            $("form#new_order.new_order").html("")
+            const newOrder = new Order(data)
+            console.log(newOrder)
+            const htmlToAdd = newOrder.formatShow()
+            $("form#new_order.new_order").html(htmlToAdd)
+        })
     })
 }
 
@@ -77,15 +72,6 @@ class Order {
         this.meal = obj.meal
         this.comments = obj.comments
     }
-    static newOrderForm() {
-        return (`
-     <form>    
-     Order: <input type="text" name="ordernameform">
-     quantity:<input type="text" name="quantityform">
-             <input type="submit" name="commit" value="Create Order">
-    </form>
-          `)
-    }
 }
 Order.prototype.orderHTML = function () {
     let orderComments = this.comments.map(comment => {
@@ -111,9 +97,9 @@ Order.prototype.formatShow = function () {
     // }).join('')
 
     let orderHTML = `
-        
-        <div>quantity:${this.quantity}</div> 
-        
+    
+    <div>quantity:${this.quantity}</div> 
+    
         <button class="next-order">Next</button>   
     `
     return orderHTML
