@@ -21,11 +21,11 @@ function listenForClick() {
         fetch('orders/${id}/next')
     })
     $("#new_order").on("submit", function (e) {
-        // debugger
+
         e.preventDefault()
         const values = $(this).serialize()
 
-        $.get("/orders", values).done(function (data) {
+        $.post("/orders", values).done(function (data) {
             $("form#new_order.new_order").html("")
             const newOrder = new Order(data)
             console.log(newOrder)
@@ -97,7 +97,7 @@ Order.prototype.formatShow = function () {
     }).join('')
 
     let orderHTML = `
-    
+    <input type="hidden" value="meal_id">
     <h2>${this.meal.name}</h2></a>
     <div>quantity:${this.quantity}</div> 
      <div>comments:${orderComments}</div> 

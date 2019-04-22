@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
     end 
   end
   
-  def show
+def show
     @order = Order.find(params[:id])
     @meal = @order.meal
     respond_to do |format|
@@ -17,11 +17,12 @@ class OrdersController < ApplicationController
     end
   end
 
-  def new 
+def new 
     @order = Order.new
+    render template: 'orders/new'
   end
   
-  def create
+def create
     @order = Order.new(order_params)
     current_user.orders << @order
     if @order.save 
@@ -30,30 +31,28 @@ class OrdersController < ApplicationController
       render 'new'
     end 
   end 
-
-   
+  
 def highest_ordered
   @orders = Order.all
-
 end
 
 def users_orders
   @user = User.find_by_id(session[:user_id])
 end
 
-  def edit
+def edit
     @order = Order.find_by(id: params[:id])
   
   end
 
-  def update
+def update
     order = Order.find_by(id: params[:id])
     order.update(order_params)
     flash[:notice] = 'Order was successfully updated.' 
     redirect_to user_path(current_user)
   end
 
-  def destroy
+def destroy
     order = Order.find_by(id: params[:id])
      order.destroy
     flash[:notice] = 'Order was successfully destroyed.' 
@@ -70,13 +69,12 @@ end
 
   private
   def order_params
-    params.permit(
+    params.require(:order).permit(
         :quantity,
-        :meal, 
+        :meal_id,
         :user_id
       )
   end
-  
 
   def comment_params
     params.require(:comment).permit(:content)
