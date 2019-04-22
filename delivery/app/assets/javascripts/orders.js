@@ -28,7 +28,7 @@ function listenForClick() {
         $.post("/orders", values).done(function (data) {
             $("form#new_order.new_order").html("")
             const newOrder = new Order(data)
-            console.log(newOrder)
+            // console.log(newOrder)
             const htmlToAdd = newOrder.formatShow()
             $("form#new_order.new_order").html(htmlToAdd)
         })
