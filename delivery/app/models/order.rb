@@ -4,5 +4,14 @@ class Order < ActiveRecord::Base
   validates :quantity, presence: true
   has_many :comments
   
+  def next
+    order = Order.where("id > ?", id).first
+
+    if order
+      order
+    else
+      Order.first
+    end
+  end 
   
  end

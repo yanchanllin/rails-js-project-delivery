@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   patch '/orders/:id',to:'orders#update'
   get 'meals/:meal_id/orders/new', to: 'orders#new', as:'new_meal_order'
   post '/meals/:id/orders',to: 'orders#create'
+  get 'orders/:id/next', to: 'orders#next'
 
   resources :meals do 
     resources :orders 

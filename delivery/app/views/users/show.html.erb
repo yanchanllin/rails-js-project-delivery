@@ -14,6 +14,7 @@
   <p><strong>User Name:</strong> <%= @user.name %></p>  
   <div style="text-align:center;">
    <h1 style="font-size:160%;color:orange;">Orders:</h1>
+   
     <ol><% @user.orders.each do |order| %> 
       <li><%= order.meal.name %></br>
        quantity: <%= order.quantity %></li>
