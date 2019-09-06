@@ -18,14 +18,12 @@ function listenForClick() {
         let id = $(this).attr('data-id')
         getOrderShow(id)
     })
-
     $(document).on('click', "next-order", function () {
         let id = $(this).attr('data-id')
         fetch('orders/${id}/next')
     })
     // For the order new form page
     $("#new_order").on("submit", function (e) {
-
         e.preventDefault()
         const values = $(this).serialize()
 
@@ -35,7 +33,6 @@ function listenForClick() {
             // console.log(newOrder)
             const htmlToAdd = newOrder.formatShow()
             $("form#new_order.new_order").html(htmlToAdd)
-
         })
     })
 }
