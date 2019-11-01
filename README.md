@@ -1,4 +1,4 @@
-# delivery2
+# Delivery2
 
 Welcome to My Delivery Application.(Rails with JavaScript Portfolio Project)
 
