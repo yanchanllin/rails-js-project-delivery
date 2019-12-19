@@ -1,6 +1,6 @@
 # Delivery2
 
-Welcome to my delivery application, it's a Rails with JavaScript Portfolio Project
+It's delivery application with a Rails and JavaScript Portfolio Project
 
 This is a Rails-based app with added Javascript/Jquery front-end user can log in or with facebook to order food, create healthy meals, show all the orders and initiate deliveries to you.
 
