@@ -1,8 +1,8 @@
 # Delivery2
 
-It's a delivery application with Rails and JavaScript Portfolio Project
+It's a delivery application with Rails and JavaScript/Jquery Portfolio Project
 
-This is a Rails-based app with added Javascript/Jquery front-end user can log in or with facebook to order food, create healthy meals, show all the orders and initiate deliveries to you.
+User can log in or with facebook to order food, create healthy meals show all the orders and initiate deliveries to you.
 
 To use this app, just clone https://github.com/yanchanllin/rails-js-project-delivery.git. After cloning, change directory to rails project/delivery and run the following: 'bundle install', 'rails db:migrate', and run 'rails s'; then navigate to the server https://localhost:3000.
 
