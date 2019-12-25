@@ -1,5 +1,7 @@
 # Delivery2
 
+[ NOTE ]: I will return to this app to clean up the code 
+
 ## Background
 It's a delivery application with Rails and JavaScript/Jquery Portfolio Project
 
