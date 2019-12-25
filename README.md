@@ -1,5 +1,6 @@
 # Delivery2
 
+## Background
 It's a delivery application with Rails and JavaScript/Jquery Portfolio Project
 
 User can log in or sign in with facebook account to order food, create healthy meals show all orders and initiate deliveries to you
